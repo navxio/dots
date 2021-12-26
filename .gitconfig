@@ -1,0 +1,55 @@
+[user]
+	name = Nav Saini
+	email = navdeep@mailbox.org
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[core]
+	pager = delta
+	excludesfile = /Users/nav/.gitignore_global
+	excludes = .rc/.gitignore
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	features = side-by-side line-numbers decorations
+	whitespace-error-style = 22 reverse
+[delta "decorations"]
+	commit-decoration-style = bold yellow box ul
+	file-style = bold yellow ul
+	file-decoration-style = none
+[diff]
+	colorMoved = zebra
+	tool = kdiff3
+[commit]
+	template = /Users/nav/.stCommitMsg
+[help]
+    autocorrect = 1
+[merge]
+    tool = kdiff3
+    renameLimit = 0
+[alias]
+	s = status
+	lo = log --oneline -n 10
+	rao = remote add origin
+	rro = remote remove origin
+	ac = !git add . && git commit -am
+	last = log -1 HEAD
+	undo = reset --soft HEAD~1
+	gra = log --all --decorate --oneline --graph
+	qc =!git commit -am \"$(curl whatthecommit.com/index.txt)\"
+    ur = !git commit -m "update readme"
+[push]
+    default = current
+    followTags = true
+[stash]
+	showPatch = true
+[log]
+	date = relative
+[color]
+	ui = true
+[pull]
+	rebase = false
+[init]
+	defaultBranch = trunk
