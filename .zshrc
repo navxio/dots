@@ -11,7 +11,8 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
-export ZPLUG_HOME=/opt/homebrew/opt/zplug
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+export ZPLUG_HOME=/home/nav/.zplug
 source $ZPLUG_HOME/init.zsh
 
 zplug "spaceship-prompt/spaceship-prompt"
@@ -29,7 +30,6 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load
 
-export PATH="/opt/homebrew/bin:$PATH"
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
@@ -51,11 +51,8 @@ function pomo() {
         sleep "${sec:?}" && echo "${msg:?}" && say "${msg:?}"
     done
 }
-[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+
 function take() {
   mkdir $1; cd $1;
 }
-export PATH="/usr/local/opt/python@3.7/bin:$PATH"
-export PATH="/usr/local/opt/ansible@2.8/bin:$PATH"
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
