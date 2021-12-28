@@ -34,7 +34,6 @@ export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
 # heroku autocomplete setup
-HEROKU_AC_ZSH_SETUP_PATH=/Users/nav/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
 function gi() { curl -sLw n https://www.toptal.com/developers/gitignore/api/$@ ;}
 
 setopt autocd autopushd
