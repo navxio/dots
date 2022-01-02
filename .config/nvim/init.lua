@@ -7,11 +7,14 @@ end
 vim.opt.termguicolors = true
 
 vim.o.background = 'dark'
+vim.g.mapleader = ' '
 
 return require('packer').startup(function(use)
 
   use {'akinsho/bufferline.nvim', requires='kyazdani42/nvim-web-devicons'}
   use 'wbthomason/packer.nvim'
+
+  use 'svermeulen/vimpeccable'
 
   use 'jeffkreeftmeijer/neovim-sensible'
   use 'kyazdani42/nvim-web-devicons'
@@ -80,4 +83,13 @@ return require('packer').startup(function(use)
 require('bufferline').setup{}
 
 require('pears').setup()
+
+-- vimpeccable keybindings
+local vimp = require('vimp')
+
+vimp.nnoremap('<leader>ev', ':e ~/.config/nvim/init.lua<cr>')
+vimp.nnoremap('<leader>n', ':NvimTreeToggle<cr>')
+vimp.nnoremap('<leader>s', ':w<cr>')
+vimp.nnoremap('<leader>ff', ':Telescope find_files<CR>')
+
 end)
