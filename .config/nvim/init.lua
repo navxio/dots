@@ -6,6 +6,8 @@ end
 
 vim.api.nvim_command('set termguicolors')
 
+vim.o.background = 'dark'
+
 return require('packer').startup(function(use)
   -- My plugins here
   -- use 'foo1/bar1.nvim'
@@ -14,6 +16,8 @@ return require('packer').startup(function(use)
 
   use 'jeffkreeftmeijer/neovim-sensible'
   use 'kyazdani42/nvim-web-devicons'
+
+  use {'adisen99/apprentice.nvim', requires = {'rktjmp/lush.nvim'}}
 
   use 'machakann/vim-sandwich'
 
@@ -42,5 +46,32 @@ return require('packer').startup(function(use)
   end
 
   require'feline'.setup()
-end)
 
+  require('lush')(require('apprentice').setup({
+    plugins = {
+      'gitsigns',
+      'cmp', -- nvim-cmp
+      'lsp',
+      'lspsaga',
+      'packer',
+      'signify',
+      'telescope',
+      'treesitter'
+  },
+  langs = {
+    'c',
+    'rust',
+    'html',
+    'golang',
+    'css',
+    'js',
+    'markdown',
+    'python',
+    'typescript',
+    'ocaml',
+    'jsx',
+    'json',
+    'ruby'
+  }
+}))
+end)
