@@ -114,12 +114,12 @@ return require('packer').startup(function(use)
   local vimp = require('vimp')
 
   vimp.nnoremap('<leader>rc', ':e ~/.config/nvim/init.lua<cr>')
-  vimp.nnoremap('<leader>n', ':NvimTreeToggle<cr>')
-  vimp.nnoremap('<leader>s', ':w<cr>')
+  vimp.nnoremap('<c-n>', ':NvimTreeToggle<cr>')
+  vimp.nnoremap('<c-s>', ':w<cr>')
   vimp.nnoremap('<leader>e', ':q!<cr>')
-  vimp.nnoremap('<leader>ff', ':Telescope find_files<CR>')
+  vimp.nnoremap('<c-f>', ':Telescope find_files<CR>')
 
-  vim.api.nvim_set_keymap('n', '<leader>g', "<cmd>lua _lazygit_toggle()<CR>",
+  vim.api.nvim_set_keymap('n', '<c-g>', "<cmd>lua _lazygit_toggle()<CR>",
   {noremap = true, silent = true })
 
 end)
