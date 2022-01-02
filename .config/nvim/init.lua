@@ -5,7 +5,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 vim.opt.termguicolors = true
-
 vim.o.background = 'dark'
 vim.g.mapleader = ' '
 
@@ -50,6 +49,10 @@ return require('packer').startup(function(use)
             'nvim-lua/plenary.nvim'
     },
   }
+
+  use 'terrortylor/nvim-comment'
+
+  use 'karb94/neoscroll.nvim'
 
   use {
     'kyazdani42/nvim-tree.lua',
@@ -109,6 +112,10 @@ return require('packer').startup(function(use)
       additional_vim_regex_highlighting = false
     }
   }
+
+  require('nvim_comment').setup()
+
+  require('neoscroll').setup()
 
   -- vimpeccable keybindings
   local vimp = require('vimp')
