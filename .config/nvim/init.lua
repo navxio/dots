@@ -7,6 +7,7 @@ end
 vim.opt.termguicolors = true
 vim.o.background = 'dark'
 vim.g.mapleader = ' '
+vim.o.completeopt='menu,menuone,noselect'
 
 -- setup lazygit
 local Terminal = require('toggleterm.terminal').Terminal
@@ -22,6 +23,48 @@ return require('packer').startup(function(use)
 
   use {'akinsho/bufferline.nvim', requires='kyazdani42/nvim-web-devicons'}
   use 'wbthomason/packer.nvim'
+
+  use {'datwaft/bubbly.nvim', config = function ()
+    vim.g.bubbly_palette = {
+      background = "#34343c",
+      foreground = "#c5cdd9",
+      black = "#3e4249",
+      red = "#ec7279",
+      green = "#a0c980",
+      yellow = "#deb974",
+      blue = "#6cb6eb",
+      purple = "#d38aea",
+      cyan = "#5dbbc1",
+      white = "#c5cdd9",
+      lightgrey = "#57595e",
+      darkgrey = "#404247",
+    }
+    vim.g.bubbly_statusline = {
+      'mode',
+
+      'truncate',
+
+      'path',
+      'branch',
+      'gitsigns',
+
+      'divisor',
+      'filetype',
+      'progress'
+    }
+  end}
+
+  -- completion config begins
+  use 'neovim/nvim-lspconfig'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline'
+  use 'hrsh7th/nvim-cmp'
+
+  -- vim vsnip in the house
+  use 'hrsh7th/cmp-vsnip'
+  use 'hrsh7th/vim-vsnip'
 
   use 'svermeulen/vimpeccable'
 
@@ -58,7 +101,6 @@ return require('packer').startup(function(use)
     'kyazdani42/nvim-tree.lua',
     config = function () require'nvim-tree'.setup {} end
   }
-  use 'feline-nvim/feline.nvim'
 
   use 'steelsojka/pears.nvim'
 
@@ -68,7 +110,7 @@ return require('packer').startup(function(use)
     require('packer').sync()
   end
 
-  require'feline'.setup()
+  -- require'feline'.setup()
 
   require('lush')(require('apprentice').setup({
     plugins = {
@@ -124,11 +166,12 @@ return require('packer').startup(function(use)
   vimp.nnoremap('<c-n>', ':NvimTreeToggle<cr>')
   vimp.nnoremap('<c-s>', ':w<cr>')
   vimp.nnoremap('<leader>e', ':q!<cr>')
-  vimp.nnoremap('<c-f>', ':Telescope find_files<CR>')
+  vimp.nnoremap('<c-p>', ':Telescope find_files<CR>')
 
   vim.api.nvim_set_keymap('n', '<c-g>', "<cmd>lua _lazygit_toggle()<CR>",
   {noremap = true, silent = true })
 
-end)
+  vim.g.bubbly_tabline = 0
 
+end)
 
