@@ -88,7 +88,7 @@ require('bufferline').setup{}
 require('pears').setup()
 
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = 'all',
+  ensure_installed = 'maintained',
   sync_install = false,
   ignore_install = {},
   highlight = {
