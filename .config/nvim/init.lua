@@ -7,7 +7,6 @@ end
 vim.opt.termguicolors = true
 vim.o.background = 'dark'
 vim.g.mapleader = ' '
-vim.o.completeopt='menu,menuone,noselect'
 
 -- setup lazygit
 local Terminal = require('toggleterm.terminal').Terminal
@@ -53,18 +52,6 @@ return require('packer').startup(function(use)
       'progress'
     }
   end}
-
-  -- completion config begins
-  use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
-  use 'hrsh7th/nvim-cmp'
-
-  -- vim vsnip in the house
-  use 'hrsh7th/cmp-vsnip'
-  use 'hrsh7th/vim-vsnip'
 
   use 'svermeulen/vimpeccable'
 
