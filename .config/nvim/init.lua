@@ -29,6 +29,9 @@ return require('packer').startup(function(use)
   }
 
   use {
+    'nvim-treesitter/nvim-treesitter'
+  }
+  use {
     'lewis6991/gitsigns.nvim',
     requires = {
             'nvim-lua/plenary.nvim'
@@ -83,6 +86,16 @@ return require('packer').startup(function(use)
 require('bufferline').setup{}
 
 require('pears').setup()
+
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = 'all',
+  sync_install = false,
+  ignore_install = {},
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false
+  }
+}
 
 -- vimpeccable keybindings
 local vimp = require('vimp')
