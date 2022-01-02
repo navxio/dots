@@ -1,18 +1,19 @@
--- try to call custom init
-pcall(require, "custom")
-
-local core_modules = {
-   "core.options",
-   "core.autocmds",
-   "core.mappings",
-}
-
-for _, module in ipairs(core_modules) do
-   local ok, err = pcall(require, module)
-   if not ok then
-      error("Error loading " .. module .. "\n\n" .. err)
-   end
+local fn = vim.fn
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
--- non plugin mappings
-require("core.mappings").misc()
+return require('packer').startup(function(use)
+  -- My plugins here
+  -- use 'foo1/bar1.nvim'
+  -- use 'foo2/bar2.nvim'
+  use 'feline-nvim/feline.nvim'
+  use 'wbthomason/packer.nvim'
+
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
+  if packer_bootstrap then
+    require('packer').sync()
+  end
+end)
