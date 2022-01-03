@@ -8,6 +8,15 @@ vim.opt.termguicolors = true
 vim.o.background = 'dark'
 vim.g.mapleader = ' '
 
+-- setup treesitter based folds
+vim.api.nvim_exec(
+  [[
+    set foldmethod=expr
+    set foldexpr=nvim_treesitter#foldexpr()
+  ]],
+  true
+)
+
 -- setup lazygit
 local Terminal = require('toggleterm.terminal').Terminal
 local lazygit = Terminal:new({ cmd = 'lazygit',
@@ -139,6 +148,18 @@ return require('packer').startup(function(use)
     highlight = {
       enable = true,
       additional_vim_regex_highlighting = false
+    },
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = 'gnn',
+        node_incremental = 'grn',
+        scope_incremental = 'grc',
+        node_decremental = 'grm'
+      },
+    },
+    indent = {
+      enable = true
     }
   }
 
