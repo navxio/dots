@@ -148,7 +148,6 @@ return require('packer').startup(function(use)
 
   use 'akinsho/toggleterm.nvim'
 
-
   use {
     'nvim-treesitter/nvim-treesitter'
   }
@@ -245,10 +244,18 @@ return require('packer').startup(function(use)
   vimp.nnoremap('<c-s>', ':w<cr>')
   vimp.nnoremap('<leader>e', ':q!<cr>')
   vimp.nnoremap('<c-p>', ':Telescope find_files<CR>')
+  vimp.nnoremap('<leader>bd', ':bd<CR>')
 
   vim.api.nvim_set_keymap('n', '<c-g>', "<cmd>lua _lazygit_toggle()<CR>",
   {noremap = true, silent = true })
 
   vim.g.bubbly_tabline = 0
 
+  require('telescope').setup {
+    pickers = {
+      find_files = {
+        theme = 'ivy'
+      }
+    }
+  }
 end)
