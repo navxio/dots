@@ -90,6 +90,8 @@ return require('packer').startup(function(use)
   use {'akinsho/bufferline.nvim', requires='kyazdani42/nvim-web-devicons'}
   use 'wbthomason/packer.nvim'
 
+  use { "rcarriga/vim-ultest", requires = {"vim-test/vim-test"}, run = ":UpdateRemotePlugins" }
+
   use {'datwaft/bubbly.nvim', config = function ()
     vim.g.bubbly_palette = {
       background = "#34343c",
@@ -132,6 +134,8 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-vsnip'
   use 'hrsh7th/vim-vsnip'
 
+
+  use 'f-person/git-blame.nvim'
   use 'svermeulen/vimpeccable'
 
   use 'jeffkreeftmeijer/neovim-sensible'
@@ -245,6 +249,8 @@ return require('packer').startup(function(use)
   vimp.nnoremap('<leader>e', ':q!<cr>')
   vimp.nnoremap('<c-p>', ':Telescope find_files<CR>')
   vimp.nnoremap('<leader>bd', ':bd<CR>')
+  vimp.nnoremap('<leader>tt', ':ToggleTerm<CR>')
+  vimp.nnoremap('<leader>uu', ':PackerUpdate<CR>')
 
   vim.api.nvim_set_keymap('n', '<c-g>', "<cmd>lua _lazygit_toggle()<CR>",
   {noremap = true, silent = true })
