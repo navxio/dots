@@ -31,6 +31,15 @@ local Terminal = require('toggleterm.terminal').Terminal
 local lazygit = Terminal:new({ cmd = 'lazygit',
   direction = 'float',
   hidden = true })
+local my_floating_terminal = Terminal:new({
+  direction = 'float',
+  hidden = true,
+  size = 40
+})
+
+function _terminal_toggle ()
+  my_floating_terminal:toggle()
+end
 
 function _lazygit_toggle ()
   lazygit:toggle()
@@ -262,6 +271,8 @@ return require('packer').startup(function(use)
   vimp.nnoremap('<leader>uu', ':PackerUpdate<CR>')
 
   vim.api.nvim_set_keymap('n', '<c-g>', "<cmd>lua _lazygit_toggle()<CR>",
+  {noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<c-t>', "<cmd>lua _terminal_toggle()<CR>",
   {noremap = true, silent = true })
 
   vim.g.bubbly_tabline = 0
