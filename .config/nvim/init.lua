@@ -17,6 +17,15 @@ vim.api.nvim_exec(
   true
 )
 
+-- configure splits
+vim.api.nvim_exec(
+  [[
+  set splitright
+  set splitbelow
+  ]],
+  true
+)
+
 -- setup lazygit
 local Terminal = require('toggleterm.terminal').Terminal
 local lazygit = Terminal:new({ cmd = 'lazygit',
