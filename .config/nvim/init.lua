@@ -45,6 +45,9 @@ function _lazygit_toggle ()
   lazygit:toggle()
 end
 
+vim.api.nvim_set_keymap('n', '<c-t>', "<cmd>lua _terminal_toggle()<CR>",
+{noremap = true, silent = true })
+
  -- Setup nvim-cmp.
 local cmp = require'cmp'
 
@@ -271,8 +274,6 @@ return require('packer').startup(function(use)
   vimp.nnoremap('<leader>uu', ':PackerUpdate<CR>')
 
   vim.api.nvim_set_keymap('n', '<c-g>', "<cmd>lua _lazygit_toggle()<CR>",
-  {noremap = true, silent = true })
-  vim.api.nvim_set_keymap('n', '<c-t>', "<cmd>lua _terminal_toggle()<CR>",
   {noremap = true, silent = true })
 
   vim.g.bubbly_tabline = 0
