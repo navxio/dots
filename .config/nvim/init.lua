@@ -106,6 +106,7 @@ return require('packer').startup(function(use)
 
   use { "rcarriga/vim-ultest", requires = {"vim-test/vim-test"}, run = ":UpdateRemotePlugins" }
 
+  use 'p00f/nvim-ts-rainbow'
   use {'datwaft/bubbly.nvim', config = function ()
     vim.g.bubbly_palette = {
       background = "#34343c",
