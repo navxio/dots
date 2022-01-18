@@ -16,15 +16,8 @@ vim.api.nvim_exec(
   ]],
   true
 )
-
--- configure splits
-vim.api.nvim_exec(
-  [[
-  set splitright
-  set splitbelow
-  ]],
-  true
-)
+vim.cmd("set splitright")
+vim.cmd("set splitbelow")
 
 -- setup lazygit
 local Terminal = require('toggleterm.terminal').Terminal
@@ -199,8 +192,6 @@ return require('packer').startup(function(use)
   if packer_bootstrap then
     require('packer').sync()
   end
-
-  -- require'feline'.setup()
 
   require('lush')(require('apprentice').setup({
     plugins = {
