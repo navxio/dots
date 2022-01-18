@@ -177,8 +177,9 @@ return require('packer').startup(function(use)
     },
   }
 
-  use 'terrortylor/nvim-comment'
+  use 'winston0410/commented.nvim'
 
+  use 'folke/which-key.nvim'
   use 'karb94/neoscroll.nvim'
 
   use {
@@ -249,9 +250,9 @@ return require('packer').startup(function(use)
     }
   }
 
-  require('nvim_comment').setup()
-
   require('neoscroll').setup()
+
+  require('which-key').setup {}
 
   -- vimpeccable keybindings
   local vimp = require('vimp')
@@ -276,5 +277,9 @@ return require('packer').startup(function(use)
         theme = 'ivy'
       }
     }
+  }
+
+  require('commented').setup {
+    keybindings = {n = "<leader>c", v="<leader>c", nl="<leader>/"}
   }
 end)
