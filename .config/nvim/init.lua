@@ -232,6 +232,11 @@ return require('packer').startup(function(use)
     ensure_installed = 'maintained',
     sync_install = false,
     ignore_install = {},
+    rainbow = {
+      enable = true,
+      extended_mode = true,
+      max_file_lines = nil
+    },
     highlight = {
       enable = true,
       additional_vim_regex_highlighting = false
