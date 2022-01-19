@@ -9,16 +9,18 @@ vim.o.background = 'dark'
 vim.g.mapleader = ' '
 
 -- setup treesitter based folds
-vim.cmd('set foldmethod=expr')
-vim.cmd('set foldexpr=nvim_treesitter#foldexpr()')
+vim.cmd("set foldmethod=expr")
+vim.cmd("set foldexpr=nvim_treesitter#foldexpr()")
 vim.cmd("set splitright")
 vim.cmd("set splitbelow")
 
 -- setup lazygit
 local Terminal = require('toggleterm.terminal').Terminal
-local lazygit = Terminal:new({ cmd = 'lazygit',
+local lazygit = Terminal:new({
+  cmd = 'lazygit',
   direction = 'float',
   hidden = true })
+
 local my_floating_terminal = Terminal:new({
   direction = 'float',
   hidden = true,
@@ -269,6 +271,8 @@ return require('packer').startup(function(use)
   vimp.nnoremap('<leader>tt', ':ToggleTerm<CR>')
   vimp.nnoremap('<leader>uu', ':PackerUpdate<CR>')
   vimp.nnoremap('<C-b>', ':Telescope buffers<CR>')
+  vimp.nnoremap('<esc>', ':noh<return><esc>')
+  -- vimp.nnoremap('<esc>^[', '<esc>^[')
 
   vim.api.nvim_set_keymap('n', '<c-g>', "<cmd>lua _lazygit_toggle()<CR>",
   {noremap = true, silent = true })
