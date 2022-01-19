@@ -252,6 +252,7 @@ return require('packer').startup(function(use)
   }
 
   require('neoscroll').setup()
+  vim.cmd('unmap <C-b>')
 
   require('which-key').setup {}
 
@@ -267,6 +268,7 @@ return require('packer').startup(function(use)
   vimp.nnoremap('<leader>bd', ':bd<CR>')
   vimp.nnoremap('<leader>tt', ':ToggleTerm<CR>')
   vimp.nnoremap('<leader>uu', ':PackerUpdate<CR>')
+  vimp.nnoremap('<C-b>', ':Telescope buffers<CR>')
 
   vim.api.nvim_set_keymap('n', '<c-g>', "<cmd>lua _lazygit_toggle()<CR>",
   {noremap = true, silent = true })
