@@ -35,7 +35,6 @@ doctl
 double-conversion
 emacs
 eslint
-fd
 fdupes
 ffmpeg
 flac
