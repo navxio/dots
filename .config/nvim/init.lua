@@ -310,6 +310,7 @@ return require('packer').startup(function(use)
 
   require('neoscroll').setup()
   vim.cmd('unmap <C-b>')
+  vim.cmd('unmap <C-f>')
 
   require('which-key').setup {}
 
@@ -326,6 +327,7 @@ return require('packer').startup(function(use)
   vimp.nnoremap('<leader>tt', ':ToggleTerm<CR>')
   vimp.nnoremap('<leader>uu', ':PackerUpdate<CR>')
   vimp.nnoremap('<C-b>', ':Telescope buffers<CR>')
+  vimp.nnoremap('<C-f>', ':Telescope live_grep<CR>')
   vimp.nnoremap('<esc>', ':noh<return><esc>')
   -- vimp.nnoremap('<esc>^[', '<esc>^[')
 
