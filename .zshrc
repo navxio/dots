@@ -59,3 +59,4 @@ export PATH="/usr/local/opt/python@3.7/bin:$PATH"
 export PATH="/usr/local/opt/ansible@2.8/bin:$PATH"
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+cd nuoi

@@ -329,6 +329,11 @@ return require('packer').startup(function(use)
   vimp.nnoremap('<C-b>', ':Telescope buffers<CR>')
   vimp.nnoremap('<C-f>', ':Telescope live_grep<CR>')
   vimp.nnoremap('<esc>', ':noh<return><esc>')
+  vim.cmd('unmap <c-l>')
+  vimp.nnoremap('<c-h>', '<c-w>h')
+  vimp.nnoremap('<c-l>', '<c-w>l')
+  vimp.nnoremap('<c-j>', '<c-w>j')
+  vimp.nnoremap('<c-k>', '<c-w>k')
   -- vimp.nnoremap('<esc>^[', '<esc>^[')
 
   vim.api.nvim_set_keymap('n', '<c-g>', "<cmd>lua _lazygit_toggle()<CR>",

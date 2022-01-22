@@ -30,4 +30,4 @@ alias gpu='git pull origin trunk'
 alias python='python3'
 alias vim='nvim'
 alias config='/usr/bin/git --git-dir=$HOME/.mydots/ --work-tree=$HOME'
-    config config status.showUntrackedFiles no
+alias tree='tree -I node_modules'
