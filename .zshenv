@@ -18,3 +18,6 @@ export PATH=/Users/nav/Library/Android/sdk/platform-tools:$PATH
 export LC_ALL=en_US.UTF-8
 export EDITOR=nvim
 export TERM=xterm-256color
+export ANDROID_SDK_PATH=/Users/nav/Library/Android/sdk
+export ANDROID_SDK=/Users/nav/Library/Android/sdk
+export PATH=/Users/nav/Library/Android/sdk/platform-tools:$PATH
