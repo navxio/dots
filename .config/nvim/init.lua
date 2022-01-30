@@ -64,10 +64,7 @@ cmp.setup({
   },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    -- { name = 'vsnip' }, -- For vsnip users.
     { name = 'luasnip' }, -- For luasnip users.
-    -- { name = 'ultisnips' }, -- For ultisnips users.
-    -- { name = 'snippy' }, -- For snippy users.
   }, {
     { name = 'buffer' },
   })
@@ -100,8 +97,8 @@ require('lspconfig')['tsserver'].setup {
 
 return require('packer').startup(function(use)
 
-  use {'akinsho/bufferline.nvim', requires='kyazdani42/nvim-web-devicons'}
   use 'wbthomason/packer.nvim'
+  use {'akinsho/bufferline.nvim', requires='kyazdani42/nvim-web-devicons'}
 
   use { "rcarriga/vim-ultest", requires = {"vim-test/vim-test"}, run = ":UpdateRemotePlugins" }
 
@@ -350,6 +347,6 @@ return require('packer').startup(function(use)
   }
 
   require('commented').setup {
-    keybindings = {n = "<leader>c", v="<leader>c", nl="<leader>/"}
+    keybindings = {n = "<leader>/", v="<leader>/", nl="<leader>/"}
   }
 end)
