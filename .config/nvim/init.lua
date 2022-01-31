@@ -143,6 +143,7 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
 
+
   use {'ahmedkhalf/project.nvim',
       config = function ()
         require('project_nvim').setup{
@@ -197,6 +198,9 @@ return require('packer').startup(function(use)
       require('nvim-ts-autotag').setup()
     end
   }
+
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
+  
 
   use 'folke/which-key.nvim'
   use 'karb94/neoscroll.nvim'
@@ -313,6 +317,9 @@ return require('packer').startup(function(use)
     ensure_installed = 'maintained',
     sync_install = false,
     ignore_install = {},
+    context_commentstring = {
+      enable = true
+    },
     rainbow = {
       enable = true,
       extended_mode = true,
