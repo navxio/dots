@@ -186,6 +186,7 @@ return require('packer').startup(function(use)
 
   use 'folke/which-key.nvim'
   use 'karb94/neoscroll.nvim'
+  use 'sunjon/shade.nvim'
 
   use {
     'kyazdani42/nvim-tree.lua',
@@ -318,6 +319,8 @@ return require('packer').startup(function(use)
       enable = true
     }
   }
+
+  require('shade').setup({})
 
   require('neoscroll').setup()
   vim.cmd('unmap <C-b>')
