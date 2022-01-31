@@ -157,6 +157,13 @@ return require('packer').startup(function(use)
 
   use 'f-person/git-blame.nvim'
   use 'svermeulen/vimpeccable'
+  
+  use {
+    'folke/twilight.nvim',
+    config = function ()
+      require('twilight').setup {}
+    end
+  }
 
   use 'jeffkreeftmeijer/neovim-sensible'
   use 'kyazdani42/nvim-web-devicons'
