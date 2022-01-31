@@ -191,9 +191,18 @@ return require('packer').startup(function(use)
 
   use 'winston0410/commented.nvim'
 
+  use {
+    'windwp/nvim-ts-autotag',
+    config = function ()
+      require('nvim-ts-autotag').setup()
+    end
+  }
+
   use 'folke/which-key.nvim'
   use 'karb94/neoscroll.nvim'
   use 'sunjon/shade.nvim'
+  use 'edeneast/nightfox.nvim'
+  require('nightfox').load('nightfox')
 
   use {
     'kyazdani42/nvim-tree.lua',
