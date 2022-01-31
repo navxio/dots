@@ -38,6 +38,8 @@ end
 vim.api.nvim_set_keymap('n', '<c-t>', "<cmd>lua _terminal_toggle()<CR>",
 {noremap = true, silent = true })
 
+vim.g.nvim_tree_respect_buf_cwd = 1
+
  -- Setup nvim-cmp.
 local cmp = require'cmp'
 
@@ -141,6 +143,12 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
 
+  use {'ahmedkhalf/project.nvim',
+      config = function ()
+        require('project_nvim').setup{
+      }
+      end
+  }
 
   use 'saadparwaiz1/cmp_luasnip'
   -- snippets
@@ -181,7 +189,13 @@ return require('packer').startup(function(use)
 
   use {
     'kyazdani42/nvim-tree.lua',
-    config = function () require'nvim-tree'.setup {} end
+    config = function () require'nvim-tree'.setup {
+      update_cwd = true,
+      update_focused_file = {
+        enable = true,
+        update_cwd = true
+      }
+    } end
   }
 
   use 'steelsojka/pears.nvim'
@@ -345,6 +359,8 @@ return require('packer').startup(function(use)
       }
     }
   }
+  
+  require('telescope').load_extension('projects')
 
   require('commented').setup {
     keybindings = {n = "<leader>/", v="<leader>/", nl="<leader>/"}
