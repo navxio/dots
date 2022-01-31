@@ -1,3 +1,5 @@
+-- created by
+-- Navdeep Saini <navdeep@mailbox.org>
 local fn = vim.fn
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -144,13 +146,6 @@ return require('packer').startup(function(use)
   use 'hrsh7th/nvim-cmp'
 
 
-  use {'ahmedkhalf/project.nvim',
-      config = function ()
-        require('project_nvim').setup{
-      }
-      end
-  }
-
   use 'saadparwaiz1/cmp_luasnip'
   -- snippets
   use 'L3MON4D3/LuaSnip'
@@ -173,10 +168,46 @@ return require('packer').startup(function(use)
 
   use 'machakann/vim-sandwich'
 
+
   use {
     'nvim-telescope/telescope.nvim',
+    config = function() 
+      require('telescope').setup {
+        defaults = {
+          layout_strategy = 'ivy'
+        },
+        pickers = {
+          frecency = {
+            theme = 'ivy'
+          },
+          find_files = {
+            theme = 'ivy'
+          },
+          live_grep = {
+            theme = 'ivy'
+          }
+        }
+      }
+    end,
     requires = {{ 'nvim-lua/plenary.nvim' }}
   }
+
+  use {
+    "nvim-telescope/telescope-frecency.nvim",
+     config = function()
+       require('telescope').load_extension('frecency')
+     end,
+     requires = {'tami5/sqlite.lua'}
+  }
+
+  use {'ahmedkhalf/project.nvim',
+      config = function ()
+        require('project_nvim').setup{
+      }
+        require('telescope').load_extension('projects')
+      end
+  }
+
 
   use 'akinsho/toggleterm.nvim'
 
@@ -200,7 +231,6 @@ return require('packer').startup(function(use)
   }
 
   use 'JoosepAlviste/nvim-ts-context-commentstring'
-  
 
   use 'folke/which-key.nvim'
   use 'karb94/neoscroll.nvim'
@@ -342,7 +372,32 @@ return require('packer').startup(function(use)
       enable = true
     }
   }
-
+  -- Lua
+  use {
+    'abecodes/tabout.nvim',
+    config = function()
+      require('tabout').setup {
+      tabkey = '<Tab>', -- key to trigger tabout, set to an empty string to disable
+      backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
+      act_as_tab = true, -- shift content if tab out is not possible
+      act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+      enable_backwards = true, -- well ...
+      completion = true, -- if the tabkey is used in a completion pum
+      tabouts = {
+        {open = "'", close = "'"},
+        {open = '"', close = '"'},
+        {open = '`', close = '`'},
+        {open = '(', close = ')'},
+        {open = '[', close = ']'},
+        {open = '{', close = '}'}
+      },
+      ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+      exclude = {} -- tabout will ignore these filetypes
+  }
+    end,
+          wants = {'nvim-treesitter'}, -- or require if not used so far
+          after = {'nvim-cmp'} -- if a completion plugin is using tabs load it before
+  }
   require('shade').setup({})
 
   require('neoscroll').setup()
@@ -359,7 +414,7 @@ return require('packer').startup(function(use)
   vimp.nnoremap('<c-s>', ':w<cr>')
   vimp.inoremap('<c-s>', '<esc>:w<CR>i')
   vimp.nnoremap('<leader>e', ':q!<cr>')
-  vimp.nnoremap('<c-p>', ':Telescope find_files<CR>')
+  vimp.nnoremap('<c-p>', ':Telescope frecency theme=ivy<CR>')
   vimp.nnoremap('<leader>bd', ':bd<CR>')
   vimp.nnoremap('<leader>tt', ':ToggleTerm<CR>')
   vimp.nnoremap('<leader>uu', ':PackerUpdate<CR>')
@@ -377,16 +432,6 @@ return require('packer').startup(function(use)
   {noremap = true, silent = true })
 
   vim.g.bubbly_tabline = 0
-
-  require('telescope').setup {
-    pickers = {
-      find_files = {
-        theme = 'ivy'
-      }
-    }
-  }
-  
-  require('telescope').load_extension('projects')
 
   require('commented').setup {
     keybindings = {n = "<leader>/", v="<leader>/", nl="<leader>/"}
