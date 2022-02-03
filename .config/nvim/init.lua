@@ -47,12 +47,8 @@ local cmp = require'cmp'
 
 cmp.setup({
   snippet = {
-    -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-      -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
       require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
     end,
   },
   mapping = {
@@ -168,14 +164,10 @@ return require('packer').startup(function(use)
 
   use 'machakann/vim-sandwich'
 
-
   use {
     'nvim-telescope/telescope.nvim',
     config = function() 
       require('telescope').setup {
-        defaults = {
-          layout_strategy = 'ivy'
-        },
         pickers = {
           frecency = {
             theme = 'ivy'
@@ -235,8 +227,11 @@ return require('packer').startup(function(use)
   use 'folke/which-key.nvim'
   use 'karb94/neoscroll.nvim'
   use 'sunjon/shade.nvim'
-  use 'edeneast/nightfox.nvim'
-  require('nightfox').load('nightfox')
+  use {'edeneast/nightfox.nvim',
+    config = function ()
+      require('nightfox').load('nordfox')
+    end
+    }
 
   use {
     'kyazdani42/nvim-tree.lua',
@@ -414,13 +409,14 @@ return require('packer').startup(function(use)
   vimp.nnoremap('<c-s>', ':w<cr>')
   vimp.inoremap('<c-s>', '<esc>:w<CR>i')
   vimp.nnoremap('<leader>e', ':q!<cr>')
-  vimp.nnoremap('<c-p>', ':Telescope frecency theme=ivy<CR>')
+  vimp.nnoremap('<c-p>', ':Telescope find_files<CR>')
   vimp.nnoremap('<leader>bd', ':bd<CR>')
   vimp.nnoremap('<leader>tt', ':ToggleTerm<CR>')
   vimp.nnoremap('<leader>uu', ':PackerUpdate<CR>')
   vimp.nnoremap('<C-b>', ':Telescope buffers<CR>')
   vimp.nnoremap('<C-f>', ':Telescope live_grep<CR>')
   vimp.nnoremap('<esc>', ':noh<return><esc>')
+  vimp.nnoremap('<C-a>', ':Telescope projects<CR>')
   vim.cmd('unmap <c-l>')
   vimp.nnoremap('<c-h>', '<c-w>h')
   vimp.nnoremap('<c-l>', '<c-w>l')
