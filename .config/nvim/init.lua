@@ -15,6 +15,13 @@ vim.cmd("set foldmethod=expr")
 vim.cmd("set foldexpr=nvim_treesitter#foldexpr()")
 vim.cmd("set splitright")
 vim.cmd("set splitbelow")
+-- format on save
+vim.api.nvim_exec([[
+augroup FormatAutogroup
+  autocmd!
+  autocmd BufWritePost *.jsx,*.js,*.rs,*.lua FormatWrite
+augroup END
+]], true)
 
 -- setup lazygit
 local Terminal = require('toggleterm.terminal').Terminal
@@ -154,6 +161,34 @@ return require('packer').startup(function(use)
     'folke/twilight.nvim',
     config = function ()
       require('twilight').setup {}
+    end
+  }
+
+  use {
+    'mhartington/formatter.nvim',
+    config = function ()
+      require('formatter').setup({
+        filetype = {
+          javascript = {
+            function()
+              return {
+                exe = 'prettier',
+                args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), '--single-quote'},
+                stdin = true
+              }
+          end
+          },
+          python = {
+            function ()
+              return {
+                exe = 'black',
+                args = { '-' },
+                stdin = true
+              }
+            end
+          }
+        }
+      })
     end
   }
 
