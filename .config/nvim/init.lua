@@ -175,6 +175,7 @@ return require("packer").startup(
     use "hrsh7th/cmp-cmdline"
     use "hrsh7th/nvim-cmp"
 
+    use "nathom/filetype.nvim"
     use "saadparwaiz1/cmp_luasnip"
     -- snippets
     use "L3MON4D3/LuaSnip"
@@ -197,6 +198,15 @@ return require("packer").startup(
           {
             filetype = {
               javascript = {
+                function()
+                  return {
+                    exe = "prettier",
+                    args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--single-quote"},
+                    stdin = true
+                  }
+                end
+              },
+              javascriptreact = {
                 function()
                   return {
                     exe = "prettier",
