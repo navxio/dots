@@ -477,6 +477,8 @@ return require("packer").startup(
     local vimp = require("vimp")
 
     vimp.nnoremap("<leader>rc", ":e ~/.config/nvim/init.lua<cr>")
+    vimp.nnoremap("<tab>", ":bnext<CR>")
+    vimp.nnoremap("<s-tab>", ":bprevious<CR>")
     vimp.nnoremap("<c-n>", ":NvimTreeToggle<cr>")
     vimp.nnoremap("<c-s>", ":w<cr>")
     vimp.inoremap("<c-s>", "<esc>:w<CR>i")
