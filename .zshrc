@@ -3,14 +3,6 @@
 # set emacs mode as default
 bindkey -e
 
-_fzf_compgen_path() {
-  fd --hidden --follow --exclude ".git" . "$1"
-}
-
-_fzf_compgen_dir() {
-  fd --type d --hidden --follow --exclude ".git" . "$1"
-}
-
 source $ZPLUG_HOME/init.zsh
 
 zplug "spaceship-prompt/spaceship-prompt"
