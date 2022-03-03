@@ -61,6 +61,9 @@ vim.g.nvim_tree_respect_buf_cwd = 1
 
 -- Setup nvim-cmp.
 local cmp = require "cmp"
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({map_char = {tex = ""}}))
+cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = "racket"
 
 cmp.setup(
   {
@@ -182,7 +185,12 @@ return require("packer").startup(
     use "rafamadriz/friendly-snippets"
 
     use "editorconfig/editorconfig-vim"
-
+    use "rrethy/nvim-treesitter-endwise"
+    require("nvim-treesitter.configs").setup {
+      endwise = {
+        enable = true
+      }
+    }
     use "f-person/git-blame.nvim"
     use "svermeulen/vimpeccable"
 
@@ -339,7 +347,14 @@ return require("packer").startup(
       end
     }
 
-    use "steelsojka/pears.nvim"
+    use {
+      "windwp/nvim-autopairs",
+      config = function()
+        require("nvim-autopairs").setup {
+          check_ts = true
+        }
+      end
+    }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
@@ -383,7 +398,6 @@ return require("packer").startup(
       separator_style = "padded_slant"
     }
 
-    require("pears").setup()
     local function prequire(...)
       local status, lib = pcall(require, ...)
       if (status) then
