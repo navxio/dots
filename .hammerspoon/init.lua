@@ -113,5 +113,17 @@ hs.hotkey.bind(
     win:focusWindowWest(nil, false, true)
   end
 )
+
+function open_app(name)
+  return function()
+    hs.application.launchOrFocus(name)
+    if name == "Finder" then
+      hs.appfinder.appFromName(name):activate()
+    end
+  end
+end
+
+hs.hotkey.bind({"cmd"}, "Return", open_app("kitty"))
+hs.hotkey.bind({"cmd", "shift"}, "C", open_app("Chromium"))
 hs.loadSpoon("ReloadConfiguration")
 spoon.ReloadConfiguration:start()
