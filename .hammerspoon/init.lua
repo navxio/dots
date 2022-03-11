@@ -125,5 +125,6 @@ end
 
 hs.hotkey.bind({"cmd"}, "Return", open_app("kitty"))
 hs.hotkey.bind({"cmd", "shift"}, "C", open_app("Chromium"))
+hs.hotkey.bind({"cmd", "shift"}, "F", open_app("Firefox"))
 hs.loadSpoon("ReloadConfiguration")
 spoon.ReloadConfiguration:start()
