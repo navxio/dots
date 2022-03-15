@@ -12,8 +12,10 @@ vim.o.background = "dark"
 vim.g.mapleader = " "
 
 -- setup treesitter based folds
-vim.cmd("set foldmethod=expr")
-vim.cmd("set foldexpr=nvim_treesitter#foldexpr()")
+vim.wo.foldmethod = "expr"
+vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+vim.wo.foldnestmax = 3
+vim.wo.foldminlines = 1
 vim.cmd("set splitright")
 vim.cmd("set splitbelow")
 
