@@ -16,6 +16,13 @@ vim.cmd("set foldmethod=expr")
 vim.cmd("set foldexpr=nvim_treesitter#foldexpr()")
 vim.cmd("set splitright")
 vim.cmd("set splitbelow")
+
+-- start terminal in insert mode
+vim.cmd [[
+  augroup terminal
+    au TermOpen * startinsert
+  augroup END
+]]
 -- format on save
 vim.api.nvim_exec(
   [[
