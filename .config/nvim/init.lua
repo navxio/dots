@@ -280,7 +280,7 @@ return require("packer").startup(
               javascript = {
                 function()
                   return {
-                    exe = "prettier",
+                    exe = "prettierd",
                     args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--single-quote"},
                     stdin = true
                   }
@@ -289,7 +289,7 @@ return require("packer").startup(
               typescript = {
                 function()
                   return {
-                    exe = "prettier",
+                    exe = "prettierd",
                     args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--single-quote"},
                     stdin = true
                   }
@@ -298,7 +298,7 @@ return require("packer").startup(
               json = {
                 function()
                   return {
-                    exe = "prettier",
+                    exe = "prettierd",
                     args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--single-quote"},
                     stdin = true
                   }
@@ -307,7 +307,7 @@ return require("packer").startup(
               javascriptreact = {
                 function()
                   return {
-                    exe = "prettier",
+                    exe = "prettierd",
                     args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--single-quote"},
                     stdin = true
                   }
@@ -316,7 +316,7 @@ return require("packer").startup(
               typescriptreact = {
                 function()
                   return {
-                    exe = "prettier",
+                    exe = "prettierd",
                     args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--single-quote"},
                     stdin = true
                   }
@@ -483,7 +483,9 @@ return require("packer").startup(
     )
 
     require("bufferline").setup {
-      separator_style = "padded_slant"
+      options = {
+        separator_style = "slant"
+      }
     }
 
     local function prequire(...)
