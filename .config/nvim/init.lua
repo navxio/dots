@@ -10,6 +10,7 @@ end
 vim.opt.termguicolors = true
 vim.o.background = "dark"
 vim.g.mapleader = " "
+vim.g.sonokai_style = "atlantis"
 
 -- setup treesitter based folds
 vim.wo.foldmethod = "expr"
@@ -208,6 +209,8 @@ return require("packer").startup(
 
     use {"rcarriga/vim-ultest", requires = {"vim-test/vim-test"}, run = ":UpdateRemotePlugins"}
 
+    use "sainnhe/sonokai"
+
     use {
       "abecodes/tabout.nvim",
       config = function()
@@ -289,7 +292,7 @@ return require("packer").startup(
               javascript = {
                 function()
                   return {
-                    exe = "prettierd",
+                    exe = "prettier",
                     args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--single-quote"},
                     stdin = true
                   }
@@ -298,7 +301,7 @@ return require("packer").startup(
               typescript = {
                 function()
                   return {
-                    exe = "prettierd",
+                    exe = "prettier",
                     args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--single-quote"},
                     stdin = true
                   }
@@ -307,7 +310,7 @@ return require("packer").startup(
               json = {
                 function()
                   return {
-                    exe = "prettierd",
+                    exe = "prettier",
                     args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--single-quote"},
                     stdin = true
                   }
@@ -316,7 +319,7 @@ return require("packer").startup(
               javascriptreact = {
                 function()
                   return {
-                    exe = "prettierd",
+                    exe = "prettier",
                     args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--single-quote"},
                     stdin = true
                   }
@@ -325,7 +328,7 @@ return require("packer").startup(
               typescriptreact = {
                 function()
                   return {
-                    exe = "prettierd",
+                    exe = "prettier",
                     args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--single-quote"},
                     stdin = true
                   }
@@ -425,10 +428,7 @@ return require("packer").startup(
     use "karb94/neoscroll.nvim"
     use "sunjon/shade.nvim"
     use {
-      "edeneast/nightfox.nvim",
-      config = function()
-        require("nightfox").load("nordfox")
-      end
+      "edeneast/nightfox.nvim"
     }
 
     use {
@@ -620,5 +620,6 @@ return require("packer").startup(
     require("commented").setup {
       keybindings = {n = "<leader>/", v = "<leader>/", nl = "<leader>/"}
     }
+    vim.cmd("colorscheme sonokai")
   end
 )
