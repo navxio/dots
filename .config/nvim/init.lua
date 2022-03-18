@@ -20,6 +20,11 @@ vim.wo.foldminlines = 1
 vim.cmd("set splitright")
 vim.cmd("set splitbelow")
 
+vim.cmd("set tabstop=2")
+vim.cmd("set shiftwidth=2")
+vim.cmd("set softtabstop=2")
+vim.cmd("set expandtab")
+
 -- highlight on yank
 vim.cmd [[
   augroup YankHighlight
@@ -34,16 +39,6 @@ vim.cmd [[
     au TermOpen * startinsert
   augroup END
 ]]
--- format on save
-vim.api.nvim_exec(
-  [[
-augroup FormatAutogroup
-  autocmd!
-  autocmd BufWritePost *.jsx,*.json,*.js,*.rs,*.lua FormatWrite
-augroup END
-]],
-  true
-)
 vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", {noremap = true})
 
 -- setup lazygit
@@ -220,6 +215,27 @@ return require("packer").startup(
 
     use "sainnhe/sonokai"
 
+    use { "jose-elias-alvarez/null-ls.nvim",
+      config = function()
+        require("null-ls").setup({
+            sources = {
+              require('null-ls').builtins.formatting.prettierd,
+            },
+            -- you can reuse a shared lspconfig on_attach callback here
+            on_attach = function(client)
+                if client.resolved_capabilities.document_formatting then
+                    vim.cmd([[
+                    augroup LspFormatting
+                        autocmd! * <buffer>
+                        autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()
+                    augroup END
+                    ]])
+                end
+            end,
+        })
+      end
+    }
+
     use {
       "abecodes/tabout.nvim",
       config = function()
@@ -292,82 +308,8 @@ return require("packer").startup(
       end
     }
 
-    use {
-      "mhartington/formatter.nvim",
-      config = function()
-        require("formatter").setup(
-          {
-            filetype = {
-              javascript = {
-                function()
-                  return {
-                    exe = "prettierd",
-                    args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--single-quote"},
-                    stdin = true
-                  }
-                end
-              },
-              typescript = {
-                function()
-                  return {
-                    exe = "prettierd",
-                    args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--single-quote"},
-                    stdin = true
-                  }
-                end
-              },
-              json = {
-                function()
-                  return {
-                    exe = "prettierd",
-                    args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--single-quote"},
-                    stdin = true
-                  }
-                end
-              },
-              javascriptreact = {
-                function()
-                  return {
-                    exe = "prettierd",
-                    args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--single-quote"},
-                    stdin = true
-                  }
-                end
-              },
-              typescriptreact = {
-                function()
-                  return {
-                    exe = "prettierd",
-                    args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--single-quote"},
-                    stdin = true
-                  }
-                end
-              },
-              python = {
-                function()
-                  return {
-                    exe = "black",
-                    args = {"-"},
-                    stdin = true
-                  }
-                end
-              },
-              lua = {
-                function()
-                  return {
-                    exe = "luafmt",
-                    args = {"--indent-count", 2, "--stdin"},
-                    stdin = true
-                  }
-                end
-              }
-            }
-          }
-        )
-      end
-    }
-
     use "jeffkreeftmeijer/neovim-sensible"
+
     use "kyazdani42/nvim-web-devicons"
 
     use {"adisen99/apprentice.nvim", requires = {"rktjmp/lush.nvim"}}
