@@ -20,6 +20,14 @@ vim.wo.foldminlines = 1
 vim.cmd("set splitright")
 vim.cmd("set splitbelow")
 
+-- highlight on yank
+vim.cmd [[
+  augroup YankHighlight
+    autocmd!
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+  augroup end
+]]
+
 -- start terminal in insert mode
 vim.cmd [[
   augroup terminal
@@ -36,6 +44,7 @@ augroup END
 ]],
   true
 )
+vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", {noremap = true})
 
 -- setup lazygit
 local Terminal = require("toggleterm.terminal").Terminal
@@ -601,6 +610,7 @@ return require("packer").startup(
     vimp.nnoremap("<c-p>", ":Telescope find_files<CR>")
     vimp.nnoremap("<leader>bd", ":bd<CR>")
     vimp.nnoremap("<leader>tt", ":ToggleTerm<CR>")
+    vimp.nnoremap("<leader>te", ":term<CR>")
     vimp.nnoremap("<leader>uu", ":PackerUpdate<CR>")
     vimp.nnoremap("<C-b>", ":Telescope buffers<CR>")
     vimp.nnoremap("<C-f>", ":Telescope live_grep<CR>")
