@@ -563,6 +563,7 @@ return require("packer").startup(
     vimp.nnoremap("<c-l>", "<c-w>l")
     vimp.nnoremap("<c-j>", "<c-w>j")
     vimp.nnoremap("<c-k>", "<c-w>k")
+    vimp.nnoremap("<leader>ps", ":PackerSync<CR>")
     -- vimp.nnoremap('<esc>^[', '<esc>^[')
 
     vim.api.nvim_set_keymap("n", "<c-g>", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
