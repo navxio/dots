@@ -220,6 +220,7 @@ return require("packer").startup(
         require("null-ls").setup({
             sources = {
               require('null-ls').builtins.formatting.prettierd,
+              require('null-ls').builtins.formatting.stylua
             },
             -- you can reuse a shared lspconfig on_attach callback here
             on_attach = function(client)
