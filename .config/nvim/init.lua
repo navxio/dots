@@ -295,7 +295,6 @@ return require("packer").startup(function(use)
 		},
 	})
 	use("f-person/git-blame.nvim")
-	use("svermeulen/vimpeccable")
 
 	use({
 		"folke/twilight.nvim",
@@ -531,33 +530,29 @@ return require("packer").startup(function(use)
 
 	require("which-key").setup({})
 
-	-- vimpeccable keybindings
-	local vimp = require("vimp")
-
-	vimp.nnoremap("<leader>rc", ":e ~/.config/nvim/init.lua<cr>")
-	vimp.nnoremap("<tab>", ":bnext<CR>")
-	vimp.nnoremap("<s-tab>", ":bprevious<CR>")
-	vimp.nnoremap("<c-n>", ":NvimTreeToggle<cr>")
-	vimp.nnoremap("<c-s>", ":w<cr>")
-	vimp.inoremap("<c-s>", "<esc>:w<CR>i")
-	vimp.nnoremap("<leader>e", ":q!<cr>")
-	vimp.nnoremap("<c-p>", ":Telescope find_files<CR>")
-	vimp.nnoremap("<leader>bd", ":bd<CR>")
-	vimp.nnoremap("<leader>te", ":ToggleTerm<CR>")
-	vimp.nnoremap("<leader>tt", ":term<CR>")
-	vimp.nnoremap("<leader>uu", ":PackerUpdate<CR>")
-	vimp.nnoremap("<C-b>", ":Telescope buffers<CR>")
-	vimp.nnoremap("<C-f>", ":Telescope live_grep<CR>")
-	vimp.nnoremap("<esc>", ":noh<return><esc>")
-	vimp.nnoremap("<C-a>", ":Telescope projects<CR>")
+	-- keybindings
+	vim.api.nvim_set_keymap("n", "<leader>rc", ":e ~/.config/nvim/init.lua<cr>", { expr = false })
+	vim.api.nvim_set_keymap("n", "<tab>", ":bnext<CR>", { noremap = false })
+	vim.api.nvim_set_keymap("n", "<s-tab", ":bprevious<cr>", { noremap = false })
+	vim.api.nvim_set_keymap("n", "<c-n>", ":NvimTreeToggle<cr>", { noremap = false })
+	vim.api.nvim_set_keymap("n", "<c-s>", ":w<cr>", { noremap = false })
+	vim.api.nvim_set_keymap("i", "<c-s>", "<esc>:w<cr>a", { noremap = false })
+	vim.api.nvim_set_keymap("n", "<leader>e", ":q!<cr>", { noremap = false })
+	vim.api.nvim_set_keymap("n", "<c-p>", ":Telescope find_files<CR>", { noremap = false })
+	vim.api.nvim_set_keymap("n", "<leader>bd", ":bd<CR>", { noremap = false })
+	vim.api.nvim_set_keymap("n", "<leader>te", ":ToggleTerm<CR>", { noremap = false })
+	vim.api.nvim_set_keymap("n", "<leader>tt", ":term<CR>", { noremap = false })
+	vim.api.nvim_set_keymap("n", "<leader>uu", ":PackerUpdate<CR>", { noremap = false })
+	vim.api.nvim_set_keymap("n", "<C-b>", ":Telescope buffers<CR>", { noremap = false })
+	vim.api.nvim_set_keymap("n", "<C-f>", ":Telescope live_grep<CR>", { noremap = false })
+	vim.api.nvim_set_keymap("n", "<esc>", ":noh<return><esc>", { noremap = false })
+	vim.api.nvim_set_keymap("n", "<C-a>", ":Telescope projects<CR>", { noremap = false })
 	vim.cmd("unmap <c-l>")
-	vimp.nnoremap("<c-h>", "<c-w>h")
-	vimp.nnoremap("<c-l>", "<c-w>l")
-	vimp.nnoremap("<c-j>", "<c-w>j")
-	vimp.nnoremap("<c-k>", "<c-w>k")
-	vimp.nnoremap("<leader>ps", ":PackerSync<CR>")
-	-- vimp.nnoremap('<esc>^[', '<esc>^[')
-
+	vim.api.nvim_set_keymap("n", "<c-h>", "<c-w>h", { noremap = false })
+	vim.api.nvim_set_keymap("n", "<c-l>", "<c-w>l", { noremap = false })
+	vim.api.nvim_set_keymap("n", "<c-j>", "<c-w>j", { noremap = false })
+	vim.api.nvim_set_keymap("n", "<c-k>", "<c-w>k", { noremap = false })
+	vim.api.nvim_set_keymap("n", "<leader>ps", ":PackerSync<CR>", { noremap = false })
 	vim.api.nvim_set_keymap("n", "<c-g>", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
 
 	vim.g.bubbly_tabline = 0
