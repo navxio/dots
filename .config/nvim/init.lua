@@ -201,8 +201,6 @@ return require("packer").startup(function(use)
 	use("romgrk/nvim-treesitter-context")
 	use({ "akinsho/bufferline.nvim", requires = "kyazdani42/nvim-web-devicons" })
 
-	use("famiu/bufdelete.nvim")
-
 	use({ "rcarriga/vim-ultest", requires = { "vim-test/vim-test" }, run = ":UpdateRemotePlugins" })
 
 	use("sainnhe/sonokai")
@@ -240,6 +238,7 @@ return require("packer").startup(function(use)
 		after = { "nvim-cmp" },
 	})
 	use("p00f/nvim-ts-rainbow")
+
 	use({
 		"datwaft/bubbly.nvim",
 		config = function()
@@ -279,6 +278,7 @@ return require("packer").startup(function(use)
 	use("hrsh7th/cmp-cmdline")
 	use("hrsh7th/nvim-cmp")
 
+	-- ts
 	use("jose-elias-alvarez/nvim-lsp-ts-utils")
 
 	use("nathom/filetype.nvim")
@@ -287,7 +287,8 @@ return require("packer").startup(function(use)
 	use("L3MON4D3/LuaSnip")
 	use("rafamadriz/friendly-snippets")
 
-	use("editorconfig/editorconfig-vim")
+	use("editorconfig/editorconfig-vim") -- lazyload
+
 	use("rrethy/nvim-treesitter-endwise")
 	require("nvim-treesitter.configs").setup({
 		endwise = {
@@ -296,18 +297,9 @@ return require("packer").startup(function(use)
 	})
 	use("f-person/git-blame.nvim")
 
-	use({
-		"folke/twilight.nvim",
-		config = function()
-			require("twilight").setup({})
-		end,
-	})
-
 	use("jeffkreeftmeijer/neovim-sensible")
 
 	use("kyazdani42/nvim-web-devicons")
-
-	use({ "adisen99/apprentice.nvim", requires = { "rktjmp/lush.nvim" } })
 
 	use("machakann/vim-sandwich")
 
@@ -404,34 +396,6 @@ return require("packer").startup(function(use)
 	if packer_bootstrap then
 		require("packer").sync()
 	end
-
-	require("lush")(require("apprentice").setup({
-		plugins = {
-			"gitsigns",
-			"cmp", -- nvim-cmp
-			"lsp",
-			"lspsaga",
-			"packer",
-			"signify",
-			"telescope",
-			"treesitter",
-		},
-		langs = {
-			"c",
-			"rust",
-			"html",
-			"golang",
-			"css",
-			"js",
-			"markdown",
-			"python",
-			"typescript",
-			"ocaml",
-			"jsx",
-			"json",
-			"ruby",
-		},
-	}))
 
 	require("bufferline").setup({
 		options = {
