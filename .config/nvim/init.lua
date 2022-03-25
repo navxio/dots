@@ -212,6 +212,7 @@ return require("packer").startup(function(use)
 		config = function()
 			require("null-ls").setup({
 				sources = {
+					require("null-ls").builtins.diagnostics.eslint_d,
 					require("null-ls").builtins.formatting.prettierd,
 					require("null-ls").builtins.formatting.stylua,
 				},
@@ -542,8 +543,8 @@ return require("packer").startup(function(use)
 	vimp.nnoremap("<leader>e", ":q!<cr>")
 	vimp.nnoremap("<c-p>", ":Telescope find_files<CR>")
 	vimp.nnoremap("<leader>bd", ":bd<CR>")
-	vimp.nnoremap("<leader>tt", ":ToggleTerm<CR>")
-	vimp.nnoremap("<leader>te", ":term<CR>")
+	vimp.nnoremap("<leader>te", ":ToggleTerm<CR>")
+	vimp.nnoremap("<leader>tt", ":term<CR>")
 	vimp.nnoremap("<leader>uu", ":PackerUpdate<CR>")
 	vimp.nnoremap("<C-b>", ":Telescope buffers<CR>")
 	vimp.nnoremap("<C-f>", ":Telescope live_grep<CR>")
