@@ -196,6 +196,9 @@ require("lspconfig")["tsserver"].setup({
 	end,
 })
 
+-- enable python completions
+require("lspconfig").pyright.setup({})
+
 return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 	use("romgrk/nvim-treesitter-context")
