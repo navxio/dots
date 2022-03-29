@@ -213,6 +213,7 @@ return require("packer").startup(function(use)
 					require("null-ls").builtins.diagnostics.eslint_d,
 					require("null-ls").builtins.formatting.prettierd,
 					require("null-ls").builtins.formatting.stylua,
+					require("null-ls").builtins.formatting.autopep8,
 				},
 				-- you can reuse a shared lspconfig on_attach callback here
 				on_attach = function(client)
@@ -339,6 +340,12 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	use({
+		"lukas-reineke/indent-blankline.nvim",
+		config = function()
+			require("indent_blankline").setup({})
+		end,
+	})
 	use("akinsho/toggleterm.nvim")
 
 	use({
