@@ -217,6 +217,7 @@ return require("packer").startup(function(use)
 					require("null-ls").builtins.formatting.prettierd,
 					require("null-ls").builtins.formatting.stylua,
 					require("null-ls").builtins.formatting.autopep8,
+					require("null-ls").builtins.formatting.djhtml,
 				},
 				-- you can reuse a shared lspconfig on_attach callback here
 				on_attach = function(client)
@@ -511,6 +512,7 @@ return require("packer").startup(function(use)
 	vim.api.nvim_set_keymap("n", "<leader>e", ":q!<cr>", { noremap = true })
 	vim.api.nvim_set_keymap("n", "<c-p>", ":Telescope find_files<CR>", { noremap = true })
 	vim.api.nvim_set_keymap("n", "<leader>bd", ":bd<CR>", { noremap = true })
+	vim.api.nvim_set_keymap("n", "<leader>bw", ":bw<CR>", { noremap = true })
 	vim.api.nvim_set_keymap("n", "<leader>te", ":ToggleTerm<CR>", { noremap = true })
 	vim.api.nvim_set_keymap("n", "<leader>tt", ":term<CR>", { noremap = true })
 	vim.api.nvim_set_keymap("n", "<leader>uu", ":PackerUpdate<CR>", { noremap = true })
