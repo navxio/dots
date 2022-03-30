@@ -23,11 +23,10 @@ export ANDROID_SDK_PATH=/Users/nav/Library/Android/sdk
 export ANDROID_SDK=/Users/nav/Library/Android/sdk
 export PATH=/Users/nav/Library/Android/sdk/platform-tools:$PATH
 
-export PATH="/opt/homebrew/bin:$PATH"
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-export PATH="/usr/local/opt/python@3.7/bin:$PATH"
-export PATH="/usr/local/opt/ansible@2.8/bin:$PATH"
+export PATH=/opt/homebrew/bin:$PATH
+export PATH=$HOME/.volta/bin:$PATH
+export PATH=/usr/local/opt/python@3.7/bin:$PATH
+export PATH=/usr/local/opt/ansible@2.8/bin:$PATH
 export ANDROID_SDK=/Users/nav/Library/Android/sdk
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
