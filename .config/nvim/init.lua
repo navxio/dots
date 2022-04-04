@@ -218,6 +218,7 @@ return require("packer").startup(function(use)
 					require("null-ls").builtins.formatting.stylua,
 					require("null-ls").builtins.formatting.autopep8,
 					require("null-ls").builtins.formatting.djhtml,
+					require("null-ls").builtins.code_actions.shellcheck,
 				},
 				-- you can reuse a shared lspconfig on_attach callback here
 				on_attach = function(client)
