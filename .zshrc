@@ -20,6 +20,14 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load
 
+
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
+
 # heroku autocomplete setup
 HEROKU_AC_ZSH_SETUP_PATH=/Users/nav/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
 function gi() { curl -sLw n https://www.toptal.com/developers/gitignore/api/$@ ;}
