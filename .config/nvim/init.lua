@@ -227,331 +227,340 @@ require("lspconfig")["tsserver"].setup({
 -- enable python completions
 require("lspconfig").pyright.setup({})
 
-return require("packer").startup(function(use)
-	use("wbthomason/packer.nvim")
-	use("romgrk/nvim-treesitter-context")
-	use({ "akinsho/bufferline.nvim", requires = "kyazdani42/nvim-web-devicons" })
+return require("packer").startup({
+	function(use)
+		use("wbthomason/packer.nvim")
+		use("romgrk/nvim-treesitter-context")
+		use({ "akinsho/bufferline.nvim", requires = "kyazdani42/nvim-web-devicons" })
 
-	use({ "rcarriga/vim-ultest", requires = { "vim-test/vim-test" }, run = ":UpdateRemotePlugins" })
+		use({ "rcarriga/vim-ultest", requires = { "vim-test/vim-test" }, run = ":UpdateRemotePlugins" })
 
-	use("sainnhe/sonokai")
+		use("sainnhe/sonokai")
 
-	use({
-		"jose-elias-alvarez/null-ls.nvim",
-		config = function()
-			require("null-ls").setup({
-				sources = {
-					require("null-ls").builtins.diagnostics.eslint_d,
-					require("null-ls").builtins.formatting.prettierd,
-					require("null-ls").builtins.formatting.stylua,
-					require("null-ls").builtins.formatting.autopep8,
-					require("null-ls").builtins.formatting.djhtml,
-					require("null-ls").builtins.code_actions.shellcheck,
-				},
-				-- you can reuse a shared lspconfig on_attach callback here
-				on_attach = function(client)
-					if client.resolved_capabilities.document_formatting then
-						vim.cmd([[
+		use({
+			"jose-elias-alvarez/null-ls.nvim",
+			config = function()
+				require("null-ls").setup({
+					sources = {
+						require("null-ls").builtins.diagnostics.eslint_d,
+						require("null-ls").builtins.formatting.prettierd,
+						require("null-ls").builtins.formatting.stylua,
+						require("null-ls").builtins.formatting.autopep8,
+						require("null-ls").builtins.formatting.djhtml,
+						require("null-ls").builtins.code_actions.shellcheck,
+					},
+					-- you can reuse a shared lspconfig on_attach callback here
+					on_attach = function(client)
+						if client.resolved_capabilities.document_formatting then
+							vim.cmd([[
                     augroup LspFormatting
                         autocmd! * <buffer>
                         autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()
                     augroup END
                     ]])
-					end
-				end,
-			})
-		end,
-	})
+						end
+					end,
+				})
+			end,
+		})
 
-	use({
-		"abecodes/tabout.nvim",
-		config = function()
-			require("tabout").setup({})
-		end,
-		wants = { "nvim-treesitter" },
-		after = { "nvim-cmp" },
-	})
-	use("p00f/nvim-ts-rainbow")
+		use({
+			"abecodes/tabout.nvim",
+			config = function()
+				require("tabout").setup({})
+			end,
+			wants = { "nvim-treesitter" },
+			after = { "nvim-cmp" },
+		})
+		use("p00f/nvim-ts-rainbow")
 
-	use({
-		"datwaft/bubbly.nvim",
-		config = function()
-			vim.g.bubbly_palette = {
-				background = "#34343c",
-				foreground = "#c5cdd9",
-				black = "#3e4249",
-				red = "#ec7279",
-				green = "#a0c980",
-				yellow = "#deb974",
-				blue = "#6cb6eb",
-				purple = "#d38aea",
-				cyan = "#5dbbc1",
-				white = "#c5cdd9",
-				lightgrey = "#57595e",
-				darkgrey = "#404247",
-			}
-			vim.g.bubbly_statusline = {
-				"mode",
-				"truncate",
-				"path",
-				"branch",
-				"gitsigns",
-				"divisor",
-				"filetype",
-				"progress",
-			}
-		end,
-	})
+		use({
+			"datwaft/bubbly.nvim",
+			config = function()
+				vim.g.bubbly_palette = {
+					background = "#34343c",
+					foreground = "#c5cdd9",
+					black = "#3e4249",
+					red = "#ec7279",
+					green = "#a0c980",
+					yellow = "#deb974",
+					blue = "#6cb6eb",
+					purple = "#d38aea",
+					cyan = "#5dbbc1",
+					white = "#c5cdd9",
+					lightgrey = "#57595e",
+					darkgrey = "#404247",
+				}
+				vim.g.bubbly_statusline = {
+					"mode",
+					"truncate",
+					"path",
+					"branch",
+					"gitsigns",
+					"divisor",
+					"filetype",
+					"progress",
+				}
+			end,
+		})
 
-	-- completion stuff
-	use("neovim/nvim-lspconfig")
-	use("hrsh7th/cmp-nvim-lsp")
-	use("hrsh7th/cmp-buffer")
-	use("hrsh7th/cmp-path")
-	use("hrsh7th/cmp-git")
-	use("hrsh7th/cmp-cmdline")
-	use("hrsh7th/nvim-cmp")
+		-- completion stuff
+		use("neovim/nvim-lspconfig")
+		use("hrsh7th/cmp-nvim-lsp")
+		use("hrsh7th/cmp-buffer")
+		use("hrsh7th/cmp-path")
+		use("hrsh7th/cmp-git")
+		use("hrsh7th/cmp-cmdline")
+		use("hrsh7th/nvim-cmp")
 
-	-- ts
-	use("jose-elias-alvarez/nvim-lsp-ts-utils")
+		-- ts
+		use("jose-elias-alvarez/nvim-lsp-ts-utils")
 
-	use("nathom/filetype.nvim")
-	use("saadparwaiz1/cmp_luasnip")
-	-- snippets
-	use("L3MON4D3/LuaSnip")
-	use("rafamadriz/friendly-snippets")
+		use("nathom/filetype.nvim")
+		use("saadparwaiz1/cmp_luasnip")
+		-- snippets
+		use("L3MON4D3/LuaSnip")
+		use("rafamadriz/friendly-snippets")
 
-	use("editorconfig/editorconfig-vim") -- lazyload
+		use("editorconfig/editorconfig-vim") -- lazyload
 
-	use("rrethy/nvim-treesitter-endwise")
-	require("nvim-treesitter.configs").setup({
-		endwise = {
-			enable = true,
-		},
-	})
-	use("f-person/git-blame.nvim")
-
-	use("jeffkreeftmeijer/neovim-sensible")
-
-	use("kyazdani42/nvim-web-devicons")
-
-	use("machakann/vim-sandwich")
-
-	use({
-		"nvim-telescope/telescope.nvim",
-		config = function()
-			require("telescope").setup({
-				pickers = {
-					frecency = {
-						theme = "ivy",
-					},
-					find_files = {
-						theme = "ivy",
-					},
-					live_grep = {
-						theme = "ivy",
-					},
-				},
-			})
-		end,
-		requires = { { "nvim-lua/plenary.nvim" } },
-	})
-
-	use({
-		"nvim-telescope/telescope-frecency.nvim",
-		config = function()
-			require("telescope").load_extension("frecency")
-		end,
-		requires = { "tami5/sqlite.lua" },
-	})
-
-	use({
-		"ahmedkhalf/project.nvim",
-		config = function()
-			require("project_nvim").setup({})
-			require("telescope").load_extension("projects")
-		end,
-	})
-
-	use({
-		"lukas-reineke/indent-blankline.nvim",
-		config = function()
-			require("indent_blankline").setup({})
-		end,
-	})
-	use("akinsho/toggleterm.nvim")
-
-	use({
-		"nvim-treesitter/nvim-treesitter",
-	})
-	use({
-		"lewis6991/gitsigns.nvim",
-		requires = {
-			"nvim-lua/plenary.nvim",
-		},
-	})
-
-	use("winston0410/commented.nvim")
-
-	use({
-		"windwp/nvim-ts-autotag",
-		config = function()
-			require("nvim-ts-autotag").setup()
-		end,
-	})
-
-	use("JoosepAlviste/nvim-ts-context-commentstring")
-
-	use("folke/which-key.nvim")
-	use("karb94/neoscroll.nvim")
-	use("sunjon/shade.nvim")
-
-	use({
-		"kyazdani42/nvim-tree.lua",
-		config = function()
-			require("nvim-tree").setup({
-				update_cwd = true,
-				update_focused_file = {
-					enable = true,
-					update_cwd = true,
-				},
-			})
-		end,
-	})
-
-	use({
-		"windwp/nvim-autopairs",
-		config = function()
-			require("nvim-autopairs").setup({
-				check_ts = true,
-			})
-		end,
-	})
-
-	-- Automatically set up your configuration after cloning packer.nvim
-	-- Put this at the end after all plugins
-	if packer_bootstrap then
-		require("packer").sync()
-	end
-
-	require("bufferline").setup({
-		options = {
-			separator_style = "slant",
-		},
-	})
-
-	local cmp = prequire("cmp")
-
-	local t = function(str)
-		return vim.api.nvim_replace_termcodes(str, true, true, true)
-	end
-
-	local check_back_space = function()
-		local col = vim.fn.col(".") - 1
-		if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
-			return true
-		else
-			return false
-		end
-	end
-
-	_G.tab_complete = function()
-		if cmp and cmp.visible() then
-			cmp.select_next_item()
-		elseif luasnip and luasnip.expand_or_jumpable() then
-			return t("<Plug>luasnip-expand-or-jump")
-		elseif check_back_space() then
-			return t("<Tab>")
-		else
-			cmp.complete()
-		end
-		return ""
-	end
-	_G.s_tab_complete = function()
-		if cmp and cmp.visible() then
-			cmp.select_prev_item()
-		elseif luasnip and luasnip.jumpable(-1) then
-			return t("<Plug>luasnip-jump-prev")
-		else
-			return t("<S-Tab>")
-		end
-		return ""
-	end
-
-	vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", { expr = true })
-	vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", { expr = true })
-	vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
-	vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
-	vim.api.nvim_set_keymap("i", "<C-E>", "<Plug>luasnip-next-choice", {})
-	vim.api.nvim_set_keymap("s", "<C-E>", "<Plug>luasnip-next-choice", {})
-
-	require("nvim-treesitter.configs").setup({
-		ensure_installed = "maintained",
-		sync_install = false,
-		ignore_install = {},
-		context_commentstring = {
-			enable = true,
-		},
-		rainbow = {
-			enable = true,
-			extended_mode = true,
-			max_file_lines = nil,
-		},
-		highlight = {
-			enable = true,
-			additional_vim_regex_highlighting = false,
-		},
-		incremental_selection = {
-			enable = true,
-			keymaps = {
-				init_selection = "gnn",
-				node_incremental = "grn",
-				scope_incremental = "grc",
-				node_decremental = "grm",
+		use("rrethy/nvim-treesitter-endwise")
+		require("nvim-treesitter.configs").setup({
+			endwise = {
+				enable = true,
 			},
+		})
+		use("f-person/git-blame.nvim")
+
+		use("jeffkreeftmeijer/neovim-sensible")
+
+		use("kyazdani42/nvim-web-devicons")
+
+		use("machakann/vim-sandwich")
+
+		use({
+			"nvim-telescope/telescope.nvim",
+			config = function()
+				require("telescope").setup({
+					pickers = {
+						frecency = {
+							theme = "ivy",
+						},
+						find_files = {
+							theme = "ivy",
+						},
+						live_grep = {
+							theme = "ivy",
+						},
+					},
+				})
+			end,
+			requires = { { "nvim-lua/plenary.nvim" } },
+		})
+
+		use({
+			"nvim-telescope/telescope-frecency.nvim",
+			config = function()
+				require("telescope").load_extension("frecency")
+			end,
+			requires = { "tami5/sqlite.lua" },
+		})
+
+		use({
+			"ahmedkhalf/project.nvim",
+			config = function()
+				require("project_nvim").setup({})
+				require("telescope").load_extension("projects")
+			end,
+		})
+
+		use({
+			"lukas-reineke/indent-blankline.nvim",
+			config = function()
+				require("indent_blankline").setup({})
+			end,
+		})
+		use("akinsho/toggleterm.nvim")
+
+		use({
+			"nvim-treesitter/nvim-treesitter",
+		})
+		use({
+			"lewis6991/gitsigns.nvim",
+			requires = {
+				"nvim-lua/plenary.nvim",
+			},
+		})
+
+		use("winston0410/commented.nvim")
+
+		use({
+			"windwp/nvim-ts-autotag",
+			config = function()
+				require("nvim-ts-autotag").setup()
+			end,
+		})
+
+		use("JoosepAlviste/nvim-ts-context-commentstring")
+
+		use("folke/which-key.nvim")
+		use("karb94/neoscroll.nvim")
+		use("sunjon/shade.nvim")
+
+		use({
+			"kyazdani42/nvim-tree.lua",
+			config = function()
+				require("nvim-tree").setup({
+					update_cwd = true,
+					update_focused_file = {
+						enable = true,
+						update_cwd = true,
+					},
+				})
+			end,
+		})
+
+		use({
+			"windwp/nvim-autopairs",
+			config = function()
+				require("nvim-autopairs").setup({
+					check_ts = true,
+				})
+			end,
+		})
+
+		-- Automatically set up your configuration after cloning packer.nvim
+		-- Put this at the end after all plugins
+		if packer_bootstrap then
+			require("packer").sync()
+		end
+
+		require("bufferline").setup({
+			options = {
+				separator_style = "slant",
+			},
+		})
+
+		local cmp = prequire("cmp")
+
+		local t = function(str)
+			return vim.api.nvim_replace_termcodes(str, true, true, true)
+		end
+
+		local check_back_space = function()
+			local col = vim.fn.col(".") - 1
+			if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
+				return true
+			else
+				return false
+			end
+		end
+
+		_G.tab_complete = function()
+			if cmp and cmp.visible() then
+				cmp.select_next_item()
+			elseif luasnip and luasnip.expand_or_jumpable() then
+				return t("<Plug>luasnip-expand-or-jump")
+			elseif check_back_space() then
+				return t("<Tab>")
+			else
+				cmp.complete()
+			end
+			return ""
+		end
+		_G.s_tab_complete = function()
+			if cmp and cmp.visible() then
+				cmp.select_prev_item()
+			elseif luasnip and luasnip.jumpable(-1) then
+				return t("<Plug>luasnip-jump-prev")
+			else
+				return t("<S-Tab>")
+			end
+			return ""
+		end
+
+		vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", { expr = true })
+		vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", { expr = true })
+		vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
+		vim.api.nvim_set_keymap("s", "< {{S-Tab>", "v:lua.s_tab_complete()", { expr = true })
+		vim.api.nvim_set_keymap("i", "<C-E>", "<Plug>luasnip-next-choice", {})
+		vim.api.nvim_set_keymap("s", "<C-E>", "<Plug>luasnip-next-choice", {})
+
+		require("nvim-treesitter.configs").setup({
+			ensure_installed = "maintained",
+			sync_install = false,
+			ignore_install = {},
+			context_commentstring = {
+				enable = true,
+			},
+			rainbow = {
+				enable = true,
+				extended_mode = true,
+				max_file_lines = nil,
+			},
+			highlight = {
+				enable = true,
+				additional_vim_regex_highlighting = false,
+			},
+			incremental_selection = {
+				enable = true,
+				keymaps = {
+					init_selection = "gnn",
+					node_incremental = "grn",
+					scope_incremental = "grc",
+					node_decremental = "grm",
+				},
+			},
+			indent = {
+				enable = true,
+			},
+		})
+		require("shade").setup({})
+
+		require("neoscroll").setup()
+		vim.cmd("unmap <C-b>")
+		vim.cmd("unmap <C-f>")
+
+		require("which-key").setup({})
+
+		-- keybindings
+		vim.api.nvim_set_keymap("n", "<leader>rc", ":e ~/.config/nvim/init.lua<cr>", { expr = false })
+		vim.api.nvim_set_keymap("n", "<tab>", ":bnext<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<s-tab", ":bprevious<cr>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<c-n>", ":NvimTreeToggle<cr>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<c-s>", ":w<cr>", { noremap = true })
+		vim.api.nvim_set_keymap("i", "<c-s>", "<esc>:w<cr>a", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<leader>e", ":q!<cr>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<c-p>", ":Telescope find_files<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<leader>bd", ":bd<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<leader>bw", ":bw<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<leader>te", ":ToggleTerm<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<leader>tt", ":term<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<leader>uu", ":PackerUpdate<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<C-b>", ":Telescope buffers<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<C-f>", ":Telescope live_grep<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<esc>", ":noh<return><esc>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<C-a>", ":Telescope projects<CR>", { noremap = true })
+		vim.cmd("unmap <c-l>")
+		vim.api.nvim_set_keymap("n", "<c-h>", "<c-w>h", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<c-l>", "<c-w>l", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<c-j>", "<c-w>j", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<c-k>", "<c-w>k", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<leader>ps", ":PackerSync<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<c-g>", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
+
+		vim.g.bubbly_tabline = 0
+
+		require("commented").setup({
+			keybindings = { n = "<leader>/", v = "<leader>/", nl = "<leader>/" },
+		})
+		vim.cmd("colorscheme sonokai")
+	end,
+	config = {
+		display = {
+			open_fn = function()
+				return require("packer.util").float({ border = "single" })
+			end,
 		},
-		indent = {
-			enable = true,
-		},
-	})
-	require("shade").setup({})
-
-	require("neoscroll").setup()
-	vim.cmd("unmap <C-b>")
-	vim.cmd("unmap <C-f>")
-
-	require("which-key").setup({})
-
-	-- keybindings
-	vim.api.nvim_set_keymap("n", "<leader>rc", ":e ~/.config/nvim/init.lua<cr>", { expr = false })
-	vim.api.nvim_set_keymap("n", "<tab>", ":bnext<CR>", { noremap = true })
-	vim.api.nvim_set_keymap("n", "<s-tab", ":bprevious<cr>", { noremap = true })
-	vim.api.nvim_set_keymap("n", "<c-n>", ":NvimTreeToggle<cr>", { noremap = true })
-	vim.api.nvim_set_keymap("n", "<c-s>", ":w<cr>", { noremap = true })
-	vim.api.nvim_set_keymap("i", "<c-s>", "<esc>:w<cr>a", { noremap = true })
-	vim.api.nvim_set_keymap("n", "<leader>e", ":q!<cr>", { noremap = true })
-	vim.api.nvim_set_keymap("n", "<c-p>", ":Telescope find_files<CR>", { noremap = true })
-	vim.api.nvim_set_keymap("n", "<leader>bd", ":bd<CR>", { noremap = true })
-	vim.api.nvim_set_keymap("n", "<leader>bw", ":bw<CR>", { noremap = true })
-	vim.api.nvim_set_keymap("n", "<leader>te", ":ToggleTerm<CR>", { noremap = true })
-	vim.api.nvim_set_keymap("n", "<leader>tt", ":term<CR>", { noremap = true })
-	vim.api.nvim_set_keymap("n", "<leader>uu", ":PackerUpdate<CR>", { noremap = true })
-	vim.api.nvim_set_keymap("n", "<C-b>", ":Telescope buffers<CR>", { noremap = true })
-	vim.api.nvim_set_keymap("n", "<C-f>", ":Telescope live_grep<CR>", { noremap = true })
-	vim.api.nvim_set_keymap("n", "<esc>", ":noh<return><esc>", { noremap = true })
-	vim.api.nvim_set_keymap("n", "<C-a>", ":Telescope projects<CR>", { noremap = true })
-	vim.cmd("unmap <c-l>")
-	vim.api.nvim_set_keymap("n", "<c-h>", "<c-w>h", { noremap = true })
-	vim.api.nvim_set_keymap("n", "<c-l>", "<c-w>l", { noremap = true })
-	vim.api.nvim_set_keymap("n", "<c-j>", "<c-w>j", { noremap = true })
-	vim.api.nvim_set_keymap("n", "<c-k>", "<c-w>k", { noremap = true })
-	vim.api.nvim_set_keymap("n", "<leader>ps", ":PackerSync<CR>", { noremap = true })
-	vim.api.nvim_set_keymap("n", "<c-g>", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
-
-	vim.g.bubbly_tabline = 0
-
-	require("commented").setup({
-		keybindings = { n = "<leader>/", v = "<leader>/", nl = "<leader>/" },
-	})
-	vim.cmd("colorscheme sonokai")
-end)
+	},
+})
