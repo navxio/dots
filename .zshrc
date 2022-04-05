@@ -33,6 +33,7 @@ HEROKU_AC_ZSH_SETUP_PATH=/Users/nav/Library/Caches/heroku/autocomplete/zsh_setup
 function gi() { curl -sLw n https://www.toptal.com/developers/gitignore/api/$@ ;}
 
 setopt autocd autopushd
+
 function pomo() {
     arg1=$1
     shift
@@ -46,7 +47,9 @@ function pomo() {
         sleep "${sec:?}" && echo "${msg:?}" && say "${msg:?}"
     done
 }
+
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+
 function take() {
   mkdir $1; cd $1;
 }
