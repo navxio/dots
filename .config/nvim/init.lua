@@ -88,6 +88,14 @@ local function prequire(...)
 end
 
 local luasnip = prequire("luasnip")
+local check_back_space = function()
+	local col = vim.fn.col(".") - 1
+	if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
+		return true
+	else
+		return false
+	end
+end
 
 cmp.setup({
 	snippet = {
@@ -106,8 +114,8 @@ cmp.setup({
 		}),
 		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 		["<Tab>"] = function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
+			if check_back_space() then
+				vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, true, true), "")
 			elseif luasnip.expand_or_jumpable() then
 				vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
 			else
@@ -115,8 +123,8 @@ cmp.setup({
 			end
 		end,
 		["<S-Tab>"] = function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
+			if check_back_space() then
+				vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<S-Tab>", true, true, true), "")
 			elseif luasnip.jumpable(-1) then
 				vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
 			else
@@ -440,49 +448,6 @@ return require("packer").startup({
 				separator_style = "slant",
 			},
 		})
-
-		local cmp = prequire("cmp")
-
-		local t = function(str)
-			return vim.api.nvim_replace_termcodes(str, true, true, true)
-		end
-
-		local check_back_space = function()
-			local col = vim.fn.col(".") - 1
-			if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
-				return true
-			else
-				return false
-			end
-		end
-
-		_G.tab_complete = function()
-			if cmp and cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip and luasnip.expand_or_jumpable() then
-				return t("<Plug>luasnip-expand-or-jump")
-			elseif check_back_space() then
-				return t("<Tab>")
-			else
-				cmp.complete()
-			end
-			return ""
-		end
-		_G.s_tab_complete = function()
-			if cmp and cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip and luasnip.jumpable(-1) then
-				return t("<Plug>luasnip-jump-prev")
-			else
-				return t("<S-Tab>")
-			end
-			return ""
-		end
-
-		vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", { expr = true })
-		vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", { expr = true })
-		vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
-		vim.api.nvim_set_keymap("s", "< {{S-Tab>", "v:lua.s_tab_complete()", { expr = true })
 		vim.api.nvim_set_keymap("i", "<C-E>", "<Plug>luasnip-next-choice", {})
 		vim.api.nvim_set_keymap("s", "<C-E>", "<Plug>luasnip-next-choice", {})
 
