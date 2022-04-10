@@ -487,7 +487,7 @@ return require("packer").startup({
 		vim.api.nvim_set_keymap("s", "<C-E>", "<Plug>luasnip-next-choice", {})
 
 		require("nvim-treesitter.configs").setup({
-			ensure_installed = "maintained",
+			ensure_installed = "all",
 			sync_install = false,
 			ignore_install = {},
 			context_commentstring = {
