@@ -344,6 +344,8 @@ return require("packer").startup({
 
 		use("kyazdani42/nvim-web-devicons")
 
+		use("kassio/neoterm")
+
 		use("machakann/vim-sandwich")
 
 		use({
@@ -506,6 +508,7 @@ return require("packer").startup({
 		vim.api.nvim_set_keymap("n", "<C-f>", ":Telescope live_grep<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "<esc>", ":noh<return><esc>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "<C-a>", ":Telescope projects<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<leader>oo", "<C-w>o", { noremap = true })
 		vim.cmd("unmap <c-l>")
 		vim.api.nvim_set_keymap("n", "<c-h>", "<c-w>h", { noremap = true })
 		vim.api.nvim_set_keymap("n", "<c-l>", "<c-w>l", { noremap = true })
