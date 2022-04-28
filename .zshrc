@@ -53,3 +53,5 @@ function pomo() {
 function take() {
   mkdir $1; cd $1;
 }
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
