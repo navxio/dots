@@ -77,7 +77,7 @@ vim.g.nvim_tree_respect_buf_cwd = 1
 local cmp = require("cmp")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
-cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = "racket"
+-- cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = "racket"
 
 local function prequire(...)
 	local status, lib = pcall(require, ...)
@@ -238,10 +238,29 @@ require("lspconfig").pyright.setup({})
 return require("packer").startup({
 	function(use)
 		use("wbthomason/packer.nvim")
+
+		use("jeffkreeftmeijer/neovim-sensible")
+
 		use("romgrk/nvim-treesitter-context")
 		use({ "akinsho/bufferline.nvim", requires = "kyazdani42/nvim-web-devicons" })
 
-		use({ "rcarriga/vim-ultest", requires = { "vim-test/vim-test" }, run = ":UpdateRemotePlugins" })
+		use("hkupty/iron.nvim")
+		use({
+			"nvim-neotest/neotest",
+			requires = {
+				"nvim-lua/plenary.nvim",
+				"nvim-treesitter/nvim-treesitter",
+				"antoinemadec/FixCursorHold.nvim",
+				"haydenmeade/neotest-jest",
+			},
+			config = function()
+				require("neotest").setup({
+					adapters = {
+						require("neotest-jest"),
+					},
+				})
+			end,
+		})
 
 		use("sainnhe/sonokai")
 
@@ -325,9 +344,9 @@ return require("packer").startup({
 		use("jose-elias-alvarez/nvim-lsp-ts-utils")
 
 		use("nathom/filetype.nvim")
-		use("saadparwaiz1/cmp_luasnip")
 		-- snippets
 		use("L3MON4D3/LuaSnip")
+		use("saadparwaiz1/cmp_luasnip")
 		use("rafamadriz/friendly-snippets")
 
 		use("editorconfig/editorconfig-vim") -- lazyload
@@ -340,7 +359,10 @@ return require("packer").startup({
 		})
 		use("f-person/git-blame.nvim")
 
-		use("jeffkreeftmeijer/neovim-sensible")
+		use({ "yioneko/nvim-yati", requires = "nvim-treesitter/nvim-treesitter" })
+		require("nvim-treesitter.configs").setup({
+			yati = { enable = true },
+		})
 
 		use("kyazdani42/nvim-web-devicons")
 
@@ -394,6 +416,7 @@ return require("packer").startup({
 
 		use({
 			"nvim-treesitter/nvim-treesitter",
+			run = ":TSUpdate",
 		})
 		use({
 			"lewis6991/gitsigns.nvim",
@@ -430,6 +453,46 @@ return require("packer").startup({
 			end,
 		})
 
+		local iron = require("iron.core")
+
+		iron.setup({
+			config = {
+				-- If iron should expose `<plug>(...)` mappings for the plugins
+				should_map_plug = false,
+				-- Whether a repl should be discarded or not
+				scratch_repl = true,
+				-- Your repl definitions come here
+				repl_definition = {
+					sh = {
+						command = { "zsh" },
+					},
+				},
+				repl_open_cmd = require("iron.view").curry.bottom(40),
+				-- how the REPL window will be opened, the default is opening
+				-- a float window of height 40 at the bottom.
+			},
+			-- Iron doesn't set keymaps by default anymore. Set them here
+			-- or use `should_map_plug = true` and map from you vim files
+			keymaps = {
+				send_motion = "<space>sc",
+				visual_send = "<space>sc",
+				send_file = "<space>sf",
+				send_line = "<space>sl",
+				send_mark = "<space>sm",
+				mark_motion = "<space>mc",
+				mark_visual = "<space>mc",
+				remove_mark = "<space>md",
+				cr = "<space>s<cr>",
+				interrupt = "<space>s<space>",
+				exit = "<space>sq",
+				clear = "<space>cl",
+			},
+			-- If the highlight is on, you can change how it looks
+			-- For the available options, check nvim_set_hl
+			highlight = {
+				italic = true,
+			},
+		})
 		use({
 			"windwp/nvim-autopairs",
 			config = function()
@@ -501,6 +564,7 @@ return require("packer").startup({
 		vim.api.nvim_set_keymap("n", "<c-p>", ":Telescope find_files<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "<leader>bd", ":bd<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "<leader>bw", ":bw<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<leader>re", ":IronRepl<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "<leader>te", ":ToggleTerm<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "<leader>tt", ":term<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "<leader>uu", ":PackerUpdate<CR>", { noremap = true })
