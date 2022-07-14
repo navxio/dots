@@ -55,3 +55,7 @@ function take() {
 }
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
+
+# bun completions
+[ -s "/Users/nav/.bun/_bun" ] && source "/Users/nav/.bun/_bun"
+

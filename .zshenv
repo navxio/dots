@@ -34,3 +34,7 @@ fi
 export ANDROID_SDK=/Users/nav/Library/Android/sdk
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Bun
+export BUN_INSTALL="/Users/nav/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
