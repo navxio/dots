@@ -73,7 +73,7 @@ vim.api.nvim_set_keymap("n", "<c-t>", "<cmd>lua _terminal_toggle()<CR>", { norem
 
 vim.g.nvim_tree_respect_buf_cwd = 1
 
--- Setup nvim-cmp.
+-- Setup nvim-cmp
 local cmp = require("cmp")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))

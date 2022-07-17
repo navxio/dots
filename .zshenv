@@ -1,3 +1,4 @@
+export ZPLUG_CACHE_DIR=$HOME/.cache/zplug
 export SPACESHIP_PROMPT_ORDER=(
   user
   dir
