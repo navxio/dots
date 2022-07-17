@@ -37,6 +37,7 @@ brew "bdw-gc"
 brew "berkeley-db", link: true
 brew "icu4c"
 brew "boost"
+brew "bpython"
 brew "osx-cpu-temp"
 brew "bpytop"
 brew "brew-cask-completion"
