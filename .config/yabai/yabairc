@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# vim: set filetype=sh:
+#
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+#Enable debug output
+yabai -m config debug_output on
+
+# setup bsp layout
+yabai -m config layout bsp
+
+# mouse settings
+yabai -m mouse_drop_action swap
+
+## paddings left and right
+yabai -m config left_padding 4
+yabai -m config right_padding 4
+yabai -m config top_padding 4
+yabai -m config bottom_padding 4
+yabai -m config focus_follows_mouse autofocus
+
+# floating windows are always on top
+yabai -m config float_topmost on
+
+## disable some apps
+yabai -m rule --add app=zoom manage=off
+yabai -m rule --add app=zoom.us manage=off
+yabai -m rule --add app=zoom.us.assistant manage=off
+yabai -m rule --add app="^System Settings$" manage=off \
+  border=off
+yabai -m rule --add app="^Signal$" width=800
+yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^Karabiner-Elements$" manage=off
+yabai -m rule --add app="^QuickTime Player$" manage=off
+yabai -m rule --add app="^Raycast$" manage=off
+yabai -m rule --add app="^Krisp$" border=off
+
+# focus window after active space changes
+yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[-1].id)"
+
+# focus window after active display changes
+yabai -m signal --add event=display_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
+
+## Pin some apps to certain spaces
+yabai -m rule --add app="^Apple Music$" space=4
+yabai -m rule --add app="^WhatsApp$" space=4
+yabai -m rule -add app="Obsidian" space=5
+yabai -m rule -add app="^Google Chrome$" space=3
+yabai -m rule -add app="^Poe$" space=4
+
+
+# set left, right padding
+yabai -m config window_gap 6
+
+# Set default border width
+yabai -m config window_border on
+yabai -m config window_border_width 2
+yabai -m config active_window_border_color 0xffee0000
+yabai -m config normal_window_border_color 0xff555555
+yabai -m config insert_window_border_color 0xffee0000
+
+# focus the last focused window on closing a window
+yabai -m signal --add event=window_destroyed action="yabai -m window --focus last"
