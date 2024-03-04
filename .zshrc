@@ -49,6 +49,9 @@ zinit light MichaelAquilina/zsh-auto-notify
 # reminds you of the aliases
 zinit ice wait lucid
 zinit light MichaelAquilina/zsh-you-should-use
+# auto pair
+zinit ice wait lucid
+zinit light "hlissner/zsh-autopair"
 
 autoload -Uz compinit
 if [[ ! -f ${HOME}/.zcompdump || ${HOME}/.zcompdump -ot ${HOME}/.zshrc ]]; then
@@ -83,3 +86,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Created by `pipx` on 2023-10-31 18:29:39
 export PATH="$PATH:/Users/nav/.local/bin"
+
+## use tab to complete autosuggestions
+#bindkey '\t' autosuggest-accept
