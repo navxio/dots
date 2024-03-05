@@ -1,0 +1,181 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+
+# Setup term for programs to be able to use it
+env:
+  TERM: alacritty
+
+window:
+  # Spread additional padding evenly around the terminal content.
+  dynamic_padding: true
+
+  # Startup Mode (changes require restart)
+  # startup_mode: Fullscreen
+
+# Sample Font configuration for font: Monoid.
+# Feel free to use different font configuration family & face for each sections
+font:
+  # Normal font face - Also used to draw glyphs on tmux & VIM
+  # NOTE: You may use any font you'd like but make sure the normal fonts
+  # support ligatures/glyphs. That's used by tmux & VIM to provide a better
+  # UI for powerline & tmux bottom bar.
+  normal:
+    # Font name
+    family: UbuntuMono Nerd Font
+    # Font face
+    style: Regular
+
+  # Bold font face
+  # bold:
+    # family: Monoid
+    # style: Bold
+
+  # Italic font face
+  # italic:
+    # family: Monoid
+    # style: Italic
+
+  # Bold italic font face
+  # Note: Since i don't have a font italic version of this font, I just specified
+  # italic & it just works. You may specifiy the bold italic version if it exists
+  # for your font
+  # bold_italic:
+    # family: Monoid
+    # style: Italic
+
+  # Font size
+  size: 18.0
+
+  # Offset is the extra space around each character. `offset.y` can be thought of
+  # as modifying the line spacing, and `offset.x` as modifying the letter spacing
+  # I've given in 14 spacing which fits really well with my fonts, you may change it
+  # to your convenience but make sure to adjust 'glyph_offset' appropriately post that
+  offset:
+   x: 0
+   y: 7
+
+  # Note: This requires RESTART
+  # By default when you change the offset above you'll see an issue, where the texts are bottom
+  # aligned with the cursor, this is to make sure they center align.
+  # This offset should usually be 1/2 of the above offset-y being set.
+  glyph_offset:
+   x: 0
+   # Keeping this as half of offset to vertically align the text in cursor
+   y: 7
+
+  # Better font rendering for mac
+  use_thin_strokes: true
+
+cursor:
+  style:
+    shape: Underline
+    blinking: Never
+
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+
+  # When set to `true`, selected text will be copied to the primary clipboard.
+  save_to_clipboard: true
+
+# Live config reload (changes require restart)
+live_config_reload: true
+
+# Setup some amazing custom key bindings here - Best thing is you can setup key bindings
+# using Mac's 'command' to control your tmux.
+# A great reference: https://arslan.io/2018/02/05/gpu-accelerated-terminal-alacritty/#make-alacritty-feel-like-iterm2
+key_bindings:
+  # ctrl-^ doesn't work in some terminals like alacritty
+  - { key: Key6, mods: Control, chars: "\x1e" }
+
+  # cmd-e sends ctrl-e
+  - { key: E, mods: Command, chars: "\x05" }
+
+  # cmd-o sends ctrl-o
+  - { key: O, mods: Command, chars: "\x0f" }
+
+  # cmd-i sends ctrl-i
+  - { key: I, mods: Command, chars: "\x09"}
+
+  # cmd-a sends ctrl-a
+  - { key: A, mods: Command, chars: "\x01" }
+
+  # cmd-p sends ctrl-p
+  - { key: P, mods: Command, chars: "\x10" }
+
+  # cmd-n sends ctrl-n
+  - { key: N, mods: Command, chars: "\x0e" }
+
+  # cmd-d sends ctrl-d
+  - { key: D, mods: Command, chars: "\x04" }
+
+  # cmd-u sends ctrl-u
+  - { key: U, mods: Command, chars: "\x15" }
+
+  # cmd-l sends ctrl-l
+  - { key: L, mods: Command, chars: "\x0c" }
+
+  # cmd-s sends ctrl-s
+  - { key: S, mods: Command, chars: "\x13" }
+
+  # cmd-r sends ctrl-r
+  - { key: R, mods: Command, chars: "\x12" }
+
+  # cmd-f sends ctrl-f
+  - { key: F, mods: Command, chars: "\x06" }
+
+  # cmd-t sends ctrl-t
+  - { key: T, mods: Command, chars: "\x14" }
+
+  # cmd-c sends ctrl-c
+  - { key: C, mods: Command, chars: "\x03" }
+
+  # cmd-b sends ctrl-b
+  - { key: B, mods: Command, chars: "\x02" }
+
+  # cmd-v sends ctrl-v
+  # - { key: V, mods: Command, chars: "\x16" }
+
+  # cmd-w sends ctrl-w
+  - { key: W, mods: Command, chars: "\x17"}
+
+  # cmd-x sends ctrl-x
+  - { key: X, mods: Command, chars: "\x18" }
+
+  # cmd-h sends ctrl-h
+  - { key: H, mods: Command, chars: "\x08" }
+
+  # cmd-g sends ctrl-g
+  - { key: G, mods: Command, chars: "\x07"}
+
+  # spawn new instance in the same dir
+  - { key: Return, mods: Command, action: ToggleSimpleFullscreen }
+
+# Colors (Gruvbox dark)
+colors:
+  # Default colors
+  primary:
+    # hard contrast: background = '#1d2021'
+    background: '#282828'
+    # soft contrast: background = '#32302f'
+    foreground: '#ebdbb2'
+
+  # Normal colors
+  normal:
+    black:   '#282828'
+    red:     '#cc241d'
+    green:   '#98971a'
+    yellow:  '#d79921'
+    blue:    '#458588'
+    magenta: '#b16286'
+    cyan:    '#689d6a'
+    white:   '#a89984'
+
+  # Bright colors
+  bright:
+    black:   '#928374'
+    red:     '#fb4934'
+    green:   '#b8bb26'
+    yellow:  '#fabd2f'
+    blue:    '#83a598'
+    magenta: '#d3869b'
+    cyan:    '#8ec07c'
+    white:   '#ebdbb2'

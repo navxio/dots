@@ -1,11 +1,4 @@
-### My dots
-
-How to use:
-
-`sh bootstrap.sh`
-
-With this config, any folder named `playground` in any project is
-ignored by git by default
+##dotfiles
 
 ### My Setup
 
@@ -30,3 +23,6 @@ SHELL: zsh
 #### Notes
 
 Press ctrl-x ctrl-l to toggle `almostontop`
+
+With this config, any folder named `playground` in any project is
+ignored by git by default
