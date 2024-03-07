@@ -1,0 +1,68 @@
+[user]
+	name = Nav Saini
+	email = navdeep@mailbox.org
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[core]
+	pager = delta
+	excludesfile = /Users/nav/.gitignore_global
+	excludes = .rc/.gitignore
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	features = side-by-side line-numbers decorations
+	whitespace-error-style = 22 reverse
+[delta "decorations"]
+	commit-decoration-style = bold yellow box ul
+	file-style = bold yellow ul
+	file-decoration-style = none
+[diff]
+	colorMoved = zebra
+	tool = Kaleidoscope
+[commit]
+	template = /Users/nav/.stCommitMsg
+[help]
+    autocorrect = 1
+[merge]
+	tool = Kaleidoscope
+    renameLimit = 0
+[alias]
+	s = status
+	lo = log --oneline -n 10
+	rao = remote add origin
+  m = commit -m
+	rro = remote remove origin
+  ac = commit -am
+  today = !git log --since=12am
+	last = log -1 HEAD
+	gra = log --all --decorate --oneline --graph
+	qc =!git commit -am \"$(curl whatthecommit.com/index.txt)\"
+  ur = !git commit -m "update readme"
+  fc = !git commit -am "first commit"
+  hpush = !git push heroku trunk:main --force
+[push]
+    default = current
+    followTags = true
+[stash]
+	showPatch = true
+[log]
+	date = relative
+[color]
+	ui = true
+[pull]
+	rebase = false
+[init]
+	defaultBranch = trunk
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+	trustExitCode = true
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[mergetool]
+	prompt = false
