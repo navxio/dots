@@ -52,6 +52,9 @@ zinit light MichaelAquilina/zsh-you-should-use
 # auto pair
 zinit ice wait lucid
 zinit light "hlissner/zsh-autopair"
+# mcfly history on steroid
+zinit ice lucid wait"0a" from"gh-r" as"program" atload'eval "$(mcfly init zsh)"'
+zinit light cantino/mcfly
 
 autoload -Uz compinit
 if [[ ! -f ${HOME}/.zcompdump || ${HOME}/.zcompdump -ot ${HOME}/.zshrc ]]; then
@@ -86,6 +89,3 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Created by `pipx` on 2023-10-31 18:29:39
 export PATH="$PATH:/Users/nav/.local/bin"
-
-## use tab to complete autosuggestions
-#bindkey '\t' autosuggest-accept
