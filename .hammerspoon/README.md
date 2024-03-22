@@ -40,7 +40,7 @@ alt-s: Show desktop
 
 #### Raycast
 
-alt - y: Search clipboard
+cmd cmd: Search clipboard
 
 alt-d: look up word in dictionary
 
@@ -54,16 +54,14 @@ alt - t: go to term space
 
 alt-u: go to chrome space
 
-alt - =: search tabs
-
 alt - ;: open new arc window
 
 alt alt: search arc
 
-#####Unbound
+##### Unbound
 
-alt-z
-
-alt - `-`
-
-alt - v
+alt -z
+alt-f
+alt-x
+alt -y
+alt-v

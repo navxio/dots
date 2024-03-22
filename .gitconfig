@@ -27,8 +27,7 @@
 [help]
     autocorrect = 1
 [merge]
-	tool = Kaleidoscope
-    renameLimit = 0
+	tool = Meld
 [alias]
 	s = status
 	lo = log --oneline -n 10

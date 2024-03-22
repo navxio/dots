@@ -34,6 +34,7 @@ hotkey.bind(alt, "s", function()
 end)
 
 -- reload yabai and hammerspoon
+-- TODO: not working
 hotkey.bind(alt_shift, "r", function()
 	hs.execute("$SCRIPTS/restart_ui.zsh")
 end)

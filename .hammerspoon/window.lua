@@ -52,11 +52,6 @@ hotkey.bind(alt_shift, "a", function()
 	hs.execute(yabaiCmd .. " window --resize right:-20:0")
 end)
 
--- toggle float
-hotkey.bind(alt, "f", function()
-	hs.execute(yabaiCmd .. " window --toggle float")
-end)
-
 -- close a window
 hotkey.bind(alt, "w", function()
 	hs.execute(yabaiCmd .. " window --close")

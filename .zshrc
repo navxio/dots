@@ -89,3 +89,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Created by `pipx` on 2023-10-31 18:29:39
 export PATH="$PATH:/Users/nav/.local/bin"
+
+# Created by `userpath` on 2024-03-15 18:49:36
+export PATH="$PATH:/Users/nav/Library/Application Support/hatch/pythons/3.12/python/bin"

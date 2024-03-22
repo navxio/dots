@@ -76,7 +76,7 @@ end)
 
 -- focus media space
 hotkey.bind(alt, ",", function()
-	hs.execute(yabaiCmd .. " space --focus 4")
+	hs.execute(yabaiCmd .. " space --focus 8")
 end)
 
 -- focus empty space or create one
